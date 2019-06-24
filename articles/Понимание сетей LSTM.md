@@ -1,4 +1,17 @@
 
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mrow>
+	<msub>
+		<mi>h</mi>
+		<mrow>
+			<mi>t</mi>
+			<mo>-</mo>
+			<mn>1</mn>
+		</mrow>
+	</msub>
+</mrow>
+</math>
+
 ## Recurrent Neural Networks
 
 Humans don’t start their thinking from scratch every second. As you read this essay, you understand each word based on your understanding of previous words. You don’t throw everything away and start thinking from scratch again. Your thoughts have persistence.
@@ -7,7 +20,9 @@ Traditional neural networks can’t do this, and it seems like a major shortcomi
 
 Recurrent neural networks address this issue. They are networks with loops in them, allowing information to persist.
 
- ![](/images/684601aa63886d86a1b4dafcf8ab079c.png)  **Recurrent Neural Networks have loops.** 
+ ![](/images/684601aa63886d86a1b4dafcf8ab079c.png)  
+ 
+ **Recurrent Neural Networks have loops.** 
 
 In the above diagram, a chunk of neural network, \\(A\\) , looks at some input \\(x\_t\\) and outputs a value \\(h\_t\\) . A loop allows information to be passed from one step of the network to the next.
 
