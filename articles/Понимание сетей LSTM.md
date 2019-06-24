@@ -1,24 +1,12 @@
-
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-<mrow>
-	<msub>
-		<mi>h</mi>
-		<mrow>
-			<mi>t</mi>
-			<mo>-</mo>
-			<mn>1</mn>
-		</mrow>
-	</msub>
-</mrow>
-</math>
+# Понимание сетей LSTM
 
 ## Recurrent Neural Networks
 
-Humans don’t start their thinking from scratch every second. As you read this essay, you understand each word based on your understanding of previous words. You don’t throw everything away and start thinking from scratch again. Your thoughts have persistence.
+Люди не начинают думать с нуля каждую секунду. Когда вы читаете это эссе, вы понимаете каждое слово на основе вашего понимания предыдущих слов. Вы не выбрасываете все и снова начинаете думать с нуля. Ваши мысли настойчивы.
 
-Traditional neural networks can’t do this, and it seems like a major shortcoming. For example, imagine you want to classify what kind of event is happening at every point in a movie. It’s unclear how a traditional neural network could use its reasoning about previous events in the film to inform later ones.
+Традиционные нейронные сети не могут этого сделать, и это кажется серьезным недостатком. Например, представьте, что вы хотите классифицировать, какое событие происходит в каждой точке фильма. Неясно, как традиционная нейронная сеть могла бы использовать свои рассуждения о предыдущих событиях в фильме для информирования более поздних.
 
-Recurrent neural networks address this issue. They are networks with loops in them, allowing information to persist.
+Периодические нейронные сети решают эту проблему. Это сети с петлями в них, позволяющими сохранять информацию.
 
  ![](/images/684601aa63886d86a1b4dafcf8ab079c.png)  
  
