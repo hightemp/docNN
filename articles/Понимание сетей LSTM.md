@@ -148,3 +148,6 @@ Before this post, I practiced explaining LSTMs during two seminar series I taugh
 * * *
 
 1.  In addition to the original authors, a lot of people contributed to the modern LSTM. A non-comprehensive list is: Felix Gers, Fred Cummins, Santiago Fernandez, Justin Bayer, Daan Wierstra, Julian Togelius, Faustino Gomez, Matteo Gagliolo, and [Alex Graves](https://scholar.google.com/citations?user=DaFHynwAAAAJ&hl=en) . [↩](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#fnref1)
+
+**********
+[LSTM](/tags/LSTM.md)
