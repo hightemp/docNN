@@ -10,13 +10,14 @@
 
  ![](/images/684601aa63886d86a1b4dafcf8ab079c.png)  
  
- **Recurrent Neural Networks have loops.** 
+** Периодические нейронные сети имеют петли. **
 
-In the above diagram, a chunk of neural network, \\(A\\) , looks at some input \\(x\_t\\) and outputs a value \\(h\_t\\) . A loop allows information to be passed from one step of the network to the next.
+На приведенной выше диаграмме блок нейронной сети \\(A\\) просматривает некоторый вход \\(x\ _t\\) и выводит значение \\(h\_t\\). Цикл позволяет передавать информацию от одного шага сети к следующему.
 
-These loops make recurrent neural networks seem kind of mysterious. However, if you think a bit more, it turns out that they aren’t all that different than a normal neural network. A recurrent neural network can be thought of as multiple copies of the same network, each passing a message to a successor. Consider what happens if we unroll the loop:
+Эти петли заставляют повторяющиеся нейронные сети казаться загадочными. Однако, если вы думаете немного больше, оказывается, что они ничем не отличаются от обычной нейронной сети. Периодическая нейронная сеть может рассматриваться как несколько копий одной и той же сети, каждая из которых передает сообщение преемнику. Посмотрим, что произойдет, если мы развернем цикл:
 
- ![An unrolled recurrent neural network.](/images/34a870b0e60d513e7153b3f27fa66786.png)  **An unrolled recurrent neural network.** 
+![An unrolled recurrent neural network.](/images/34a870b0e60d513e7153b3f27fa66786.png)  
+**An unrolled recurrent neural network.** 
 
 This chain-like nature reveals that recurrent neural networks are intimately related to sequences and lists. They’re the natural architecture of neural network to use for such data.
 
