@@ -1,5 +1,5 @@
 # Понимание сетей LSTM
-
+![](/images/d9ba4fdbad008624a037b9c9e3d6b0ed.svg+xml)
 ## Recurrent Neural Networks
 
 Люди не начинают думать с нуля каждую секунду. Когда вы читаете это эссе, вы понимаете каждое слово на основе вашего понимания предыдущих слов. Вы не выбрасываете все и снова начинаете думать с нуля. Ваши мысли настойчивы.
@@ -152,6 +152,7 @@ Before this post, I practiced explaining LSTMs during two seminar series I taugh
 * * *
 
 1.  In addition to the original authors, a lot of people contributed to the modern LSTM. A non-comprehensive list is: Felix Gers, Fred Cummins, Santiago Fernandez, Justin Bayer, Daan Wierstra, Julian Togelius, Faustino Gomez, Matteo Gagliolo, and [Alex Graves](https://scholar.google.com/citations?user=DaFHynwAAAAJ&hl=en) . [↩](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#fnref1)
+
 
 **********
 [LSTM](/tags/LSTM.md)
