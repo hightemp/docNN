@@ -144,7 +144,7 @@ We can, again, write down the outputs in terms of the inputs:
 
 For example:
 
- \\\[y\_{0,0} = A\\left(\\begin{array}{cc} x\_{0,~0}, & x\_{1,~0},~\\\\ x\_{0,~1}, & x\_{1,~1}~\\\\\\end{array}\\right)\\\]  \\\[y\_{1,0} = A\\left(\\begin{array}{cc} x\_{1,~0}, & x\_{2,~0},~\\\\ x\_{1,~1}, & x\_{2,~1}~\\\\\\end{array}\\right)\\\] 
+  \\\[y\_{0,0} = A\\left(\\begin{array}{cc} x\_{0,\~0}, & x\_{1,\~0},\~\\\\ x\_{0,\~1}, & x\_{1,\~1}\~\\\\\\end{array}\\right)\\\]  \\\[y\_{1,0} = A\\left(\\begin{array}{cc} x\_{1,\~0}, & x\_{2,\~0},\~\\\\ x\_{1,\~1}, & x\_{2,\~1}\~\\\\\\end{array}\\right)\\\] 
 
 If one combines this with the equation for \\(A(x)\\) ,
 
