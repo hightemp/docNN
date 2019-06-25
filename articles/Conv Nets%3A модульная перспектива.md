@@ -1,5 +1,5 @@
 # Conv Nets: модульная перспектива
-## Introduction
+## Introduction(1)
 
 In the last few years, deep neural networks have lead to breakthrough results on a variety of pattern recognition problems, such as computer vision and voice recognition. One of the essential components leading to these results has been a special kind of neural network called a _convolutional neural network_ .
 
@@ -181,6 +181,7 @@ I’m grateful to Eliana Lorch, Aaron Courville, and Sebastian Zany for their co
 3.  They also test using 7 in the paper. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref3) 
     
 4.  This seems to have interesting analogies to rods and cones in the retina. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref4)
+
 
 
 **********
