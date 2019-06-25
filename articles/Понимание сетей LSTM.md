@@ -71,19 +71,19 @@ LSTM также имеют эту цепочечную структуру, но 
 
  ![](/images/1c663cbd3de24a90a0a94011fda6defd.png) 
 
-The LSTM does have the ability to remove or add information to the cell state, carefully regulated by structures called gates.
+LSTM имеет возможность удалять или добавлять информацию о состоянии ячейки, тщательно регулируемую структурами, называемыми воротами.
 
-Gates are a way to optionally let information through. They are composed out of a sigmoid neural net layer and a pointwise multiplication operation.
+Ворота - это возможность, по желанию, пропустить информацию. Они состоят из слоя сигмовидной нейронной сети и операции точечного умножения.
 
  ![](/images/6ba1445193a5731e297922efdde6559f.png) 
 
-The sigmoid layer outputs numbers between zero and one, describing how much of each component should be let through. A value of zero means “let nothing through,” while a value of one means “let everything through!”
+Сигмовидный слой выводит числа от нуля до единицы, описывающие, сколько каждого компонента должно быть пропущено. Значение «ноль» означает «ничего не пропустить», а значение «один» означает «пропустить все через!»
 
-An LSTM has three of these gates, to protect and control the cell state.
+У LSTM есть три из этих ворот, чтобы защитить и управлять состоянием ячейки.
 
-## Step-by-Step LSTM Walk Through
+## Пошаговое прохождение LSTM
 
-The first step in our LSTM is to decide what information we’re going to throw away from the cell state. This decision is made by a sigmoid layer called the “forget gate layer.” It looks at \\(h\_{t-1}\\) and \\(x\_t\\) , and outputs a number between \\(0\\) and \\(1\\) for each number in the cell state \\(C\_{t-1}\\) . A \\(1\\) represents “completely keep this” while a \\(0\\) represents “completely get rid of this.”
+Первый шаг в нашем LSTM - решить, какую информацию мы собираемся выбросить из состояния ячейки. Это решение принимается сигмовидным слоем, который называется «слой забытых ворот». Он просматривает \\(h\_{t-1}\\) и \\(x\_t\\) и выводит число между \\(0\\) и \\(1\\) для каждого числа в состоянии ячейки \\(C\_{t-1}\\).\\(1\\) представляет "полностью сохранить это", в то время как \\(0\\) представляет "полностью избавиться от этого".
 
 Let’s go back to our example of a language model trying to predict the next word based on all the previous ones. In such a problem, the cell state might include the gender of the present subject, so that the correct pronouns can be used. When we see a new subject, we want to forget the gender of the old subject.
 
