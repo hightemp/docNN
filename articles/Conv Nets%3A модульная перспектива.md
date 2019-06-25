@@ -142,49 +142,49 @@
 
  ![](/images/e800550c411136d69f5266e16559a2f5.png) 
 
-We can, again, write down the outputs in terms of the inputs:
+Мы можем снова записать результаты в терминах входных данных:
 
   \\\[y\_{n,m} = A\\left(\\begin{array}{ccc} x\_{n,\~m}, & x\_{n+1,\~m},& ...,\~\\\\ x\_{n,\~m+1}, & x\_{n+1,\~m+1}, & ..., \~\\\\ &...\\\\\\end{array}\\right)\\\] 
 
-For example:
+Например:
 
   \\\[y\_{0,0} = A\\left(\\begin{array}{cc} x\_{0,\~0}, & x\_{1,\~0},\~\\\\ x\_{0,\~1}, & x\_{1,\~1}\~\\\\\\end{array}\\right)\\\]  \\\[y\_{1,0} = A\\left(\\begin{array}{cc} x\_{1,\~0}, & x\_{2,\~0},\~\\\\ x\_{1,\~1}, & x\_{2,\~1}\~\\\\\\end{array}\\right)\\\] 
 
-If one combines this with the equation for \\(A(x)\\) ,
+Если объединить это с уравнением для \\(A(x)\\),
 
  \\\[A(x) = \\sigma(Wx + b)\\\] 
 
-one has everything they need to implement a convolutional neural network, at least in theory.
+у каждого есть все, что нужно для реализации сверточной нейронной сети, по крайней мере, в теории.
 
-In practice, this is often not best way to think about convolutional neural networks. There is an alternative formulation, in terms of a mathematical operation called _convolution_ , that is often more helpful.
+На практике это часто не лучший способ думать о сверточных нейронных сетях. Существует альтернативная формулировка, в терминах математической операции, называемой _convolution_, которая часто более полезна.
 
-The convolution operation is a powerful tool. In mathematics, it comes up in diverse contexts, ranging from the study of partial differential equations to probability theory. In part because of its role in PDEs, convolution is very important in the physical sciences. It also has an important role in many applied areas, like computer graphics and signal processing.
+Операция свертки является мощным инструментом. В математике это встречается в различных контекстах, начиная от изучения уравнений с частными производными до теории вероятностей. Частично из-за своей роли в PDE, свертка очень важна в физических науках. Он также играет важную роль во многих прикладных областях, таких как компьютерная графика и обработка сигналов.
 
-For us, convolution will provide a number of benefits. Firstly, it will allow us to create much more efficient implementations of convolutional layers than the naive perspective might suggest. Secondly, it will remove a lot of messiness from our formulation, handling all the bookkeeping presently showing up in the indexing of \\(x\\) s – the present formulation may not seem messy yet, but that’s only because we haven’t got into the tricky cases yet. Finally, convolution will give us a significantly different perspective for reasoning about convolutional layers.
+Для нас свертка обеспечит ряд преимуществ. Во-первых, это позволит нам создать гораздо более эффективные реализации сверточных слоев, чем наивная перспектива. Во-вторых, это уберет много беспорядка из нашей формулировки, обрабатывая всю бухгалтерию, которая в настоящее время обнаруживается при индексировании \\(x\\) s, - настоящая формулировка может пока не показаться грязной, но это только потому что мы еще не попали в сложные элементы. Наконец, свертка даст нам существенно другую перспективу для рассуждений о сверточных слоях.
 
-> I admire the elegance of your method of computation; it must be nice to ride through these fields upon the horse of true mathematics while the like of us have to make our way laboriously on foot.  — Albert Einstein
+> Я восхищаюсь элегантностью вашего метода вычислений; должно быть, приятно ехать через эти поля на лошади настоящей математики, в то время как нам, как нам, приходится кропотливо идти пешком. - Альберт Эйнштейн
 
-## Next Posts in this Series
+## Следующие сообщения в этой серии
 
- [ **Read the next post!** ](https://colah.github.io/posts/2014-07-Understanding-Convolutions/) 
+ [ **Прочитайте следующий пост!** ](https://colah.github.io/posts/2014-07-Understanding-Convolutions/) 
 
-This post is part of a series on convolutional neural networks and their generalizations. The first two posts will be review for those familiar with deep learning, while later ones should be of interest to everyone. To get updates, subscribe to my [RSS feed](https://colah.github.io/rss.xml) !
+Этот пост является частью серии о сверточных нейронных сетях и их обобщениях. Первые два поста будут рассмотрены для тех, кто знаком с глубоким обучением, а последующие должны быть интересны всем. Чтобы получать обновления, подпишитесь на мой [RSS-канал](https://colah.github.io/rss.xml) !
 
-Please comment below or on the side. Pull requests can be made on [github](https://github.com/colah/Conv-Nets-Series) .
+Пожалуйста, прокомментируйте ниже или на стороне. Запросы на извлечение могут быть сделаны на [github](https://github.com/colah/Conv-Nets-Series) .
 
-## Acknowledgments
+## Благодарности
 
-I’m grateful to Eliana Lorch, Aaron Courville, and Sebastian Zany for their comments and support.
+Я благодарен Элиане Лорч, Аарону Курвиллу и Себастьяну Зани за их комментарии и поддержку.
 
 * * *
 
-1.  It should be noted that not all neural networks that use multiple copies of the same neuron are convolutional neural networks. Convolutional neural networks are just one type of neural network that uses the more general trick, _weight-tying_ . Other kinds of neural network that do this are recurrent neural networks and recursive neural networks. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref1) 
+1. Следует отметить, что не все нейронные сети, которые используют несколько копий одного и того же нейрона, являются сверточными нейронными сетями. Сверточные нейронные сети - это всего лишь один тип нейронных сетей, использующий более общий прием - «весовая привязка». Другие виды нейронных сетей, которые делают это, являются рекуррентными нейронными сетями и рекурсивными нейронными сетями. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref1) 
     
-2.  Groups of neurons, like \\(A\\) , that appear in multiple places are sometimes called _modules_ , and networks that use them are sometimes called _modular neural networks_ . [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref2) 
+2.  Группы нейронов, такие как \\(A\\), которые появляются в нескольких местах, иногда называют _modules_, а сети, которые их используют, иногда называют _modular neural networks_. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref2) 
     
-3.  They also test using 7 in the paper. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref3) 
+3.  Они также проверяют, используя 7 в статье. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref3) 
     
-4.  This seems to have interesting analogies to rods and cones in the retina. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref4)
+4.  Это, кажется, имеет интересные аналогии с палочками и колбочками в сетчатке. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref4)
 
 
 
