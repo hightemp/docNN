@@ -49,11 +49,13 @@ LSTM явно разработаны, чтобы избежать проблем
 
 Все рекуррентные нейронные сети имеют форму цепочки повторяющихся модулей нейронной сети. В стандартных RNN этот повторяющийся модуль будет иметь очень простую структуру, такую как один слой tanh.
 
- ![](/images/bce0d99e8bc969fa3c2ffa99f93935c5.png)  **The repeating module in a standard RNN contains a single layer.** 
+ ![](/images/bce0d99e8bc969fa3c2ffa99f93935c5.png)  
+ **Повторяющийся модуль в стандартном RNN содержит один слой.** 
 
-LSTMs also have this chain like structure, but the repeating module has a different structure. Instead of having a single neural network layer, there are four, interacting in a very special way.
+LSTM также имеют эту цепочечную структуру, но повторяющийся модуль имеет другую структуру. Вместо одного слоя нейронной сети существует четыре, взаимодействующих совершенно особым образом.
 
- ![A LSTM neural network.](/images/2795bc16b012322f7767cd4d940ba2e3.png)  **The repeating module in an LSTM contains four interacting layers.** 
+ ![Нейронная сеть LSTM.](/images/2795bc16b012322f7767cd4d940ba2e3.png)  
+ **Повторяющийся модуль в LSTM содержит четыре взаимодействующих слоя.** 
 
 Don’t worry about the details of what’s going on. We’ll walk through the LSTM diagram step by step later. For now, let’s just try to get comfortable with the notation we’ll be using.
 
