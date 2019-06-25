@@ -57,11 +57,11 @@ LSTM также имеют эту цепочечную структуру, но 
  ![Нейронная сеть LSTM.](/images/2795bc16b012322f7767cd4d940ba2e3.png)  
  **Повторяющийся модуль в LSTM содержит четыре взаимодействующих слоя.** 
 
-Don’t worry about the details of what’s going on. We’ll walk through the LSTM diagram step by step later. For now, let’s just try to get comfortable with the notation we’ll be using.
+Не беспокойтесь о деталях происходящего. Мы рассмотрим диаграмму LSTM шаг за шагом позже. А пока давайте попробуем освоиться с обозначениями, которые мы будем использовать.
 
  ![](/images/1aed12786463eade9585fd20d894f49c.png) 
 
-In the above diagram, each line carries an entire vector, from the output of one node to the inputs of others. The pink circles represent pointwise operations, like vector addition, while the yellow boxes are learned neural network layers. Lines merging denote concatenation, while a line forking denote its content being copied and the copies going to different locations.
+На приведенной выше диаграмме каждая строка несет целый вектор от выхода одного узла до входов других. Розовые кружки представляют собой точечные операции, такие как сложение векторов, а желтые прямоугольники - это обученные слои нейронной сети. Линии слияния обозначают конкатенацию, в то время как линии разветвления обозначают копируемое содержимое, а копии перемещаются в разные места.
 
 ## The Core Idea Behind LSTMs
 
