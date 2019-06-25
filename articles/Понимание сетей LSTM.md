@@ -89,9 +89,9 @@ LSTM имеет возможность удалять или добавлять 
 
  ![](/images/4035f737ddf1b26add27f4f69ccc1483.png) 
 
-The next step is to decide what new information we’re going to store in the cell state. This has two parts. First, a sigmoid layer called the “input gate layer” decides which values we’ll update. Next, a tanh layer creates a vector of new candidate values, \\(\\tilde{C}\_t\\) , that could be added to the state. In the next step, we’ll combine these two to create an update to the state.
+Следующий шаг - решить, какую новую информацию мы будем хранить в состоянии ячейки. Это состоит из двух частей. Во-первых, сигмовидный слой, называемый «входной слой затвора», решает, какие значения мы будем обновлять. Затем слой tanh создает вектор новых значений-кандидатов \\(\\tilde {C}\_t\\), которые можно добавить в состояние. На следующем шаге мы скомбинируем эти два, чтобы создать обновление состояния.
 
-In the example of our language model, we’d want to add the gender of the new subject to the cell state, to replace the old one we’re forgetting.
+В примере нашей языковой модели мы хотим добавить пол нового субъекта к состоянию ячейки, чтобы заменить старый, который мы забываем.
 
  ![](/images/5a460ea6f112de7332ca9584300c6e9c.png) 
 
