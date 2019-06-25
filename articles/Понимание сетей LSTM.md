@@ -15,39 +15,39 @@
 Эти петли заставляют повторяющиеся нейронные сети казаться загадочными. Однако, если вы думаете немного больше, оказывается, что они ничем не отличаются от обычной нейронной сети. Периодическая нейронная сеть может рассматриваться как несколько копий одной и той же сети, каждая из которых передает сообщение преемнику. Посмотрим, что произойдет, если мы развернем цикл:
 
 ![An unrolled recurrent neural network.](/images/34a870b0e60d513e7153b3f27fa66786.png)  
-**An unrolled recurrent neural network.** 
+**развернутая рекуррентная нейронная сеть.**
 
-This chain-like nature reveals that recurrent neural networks are intimately related to sequences and lists. They’re the natural architecture of neural network to use for such data.
+Эта цепочечная природа показывает, что рекуррентные нейронные сети тесно связаны с последовательностями и списками. Это естественная архитектура нейронной сети, используемая для таких данных.
 
-And they certainly are used! In the last few years, there have been incredible success applying RNNs to a variety of problems: speech recognition, language modeling, translation, image captioning… The list goes on. I’ll leave discussion of the amazing feats one can achieve with RNNs to Andrej Karpathy’s excellent blog post, [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) . But they really are pretty amazing.
+И они, безусловно, используются! За последние несколько лет был достигнут невероятный успех в применении RNN для решения разнообразных задач: распознавания речи, языкового моделирования, перевода, субтитров изображения... Список можно продолжать. Я оставлю обсуждение удивительных подвигов, которых можно достичь с помощью RNN, замечательному посту Андрея Карпати, [Необоснованная эффективность рекуррентных нейронных сетей](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). Но они действительно потрясающие.
 
-Essential to these successes is the use of “LSTMs,” a very special kind of recurrent neural network which works, for many tasks, much much better than the standard version. Almost all exciting results based on recurrent neural networks are achieved with them. It’s these LSTMs that this essay will explore.
+Существенным для этих успехов является использование «LSTM», очень особого вида рекуррентной нейронной сети, которая для многих задач работает намного лучше, чем стандартная версия. Почти все захватывающие результаты, основанные на повторяющихся нейронных сетях, достигаются с их помощью. Именно эти LSTMs, которые исследует это эссе.
 
-## The Problem of Long-Term Dependencies
+## Проблема долгосрочных зависимостей
 
-One of the appeals of RNNs is the idea that they might be able to connect previous information to the present task, such as using previous video frames might inform the understanding of the present frame. If RNNs could do this, they’d be extremely useful. But can they? It depends.
+Одна из привлекательных сторон сетей RNN заключается в том, что они могут подключить предыдущую информацию к текущей задаче, например, использование предыдущих видеокадров может дать понимание понимания текущего кадра. Если бы RNN могли сделать это, они были бы чрезвычайно полезны. Но могут ли они? Это зависит.
 
-Sometimes, we only need to look at recent information to perform the present task. For example, consider a language model trying to predict the next word based on the previous ones. If we are trying to predict the last word in “the clouds are in the _sky_ ,” we don’t need any further context – it’s pretty obvious the next word is going to be sky. In such cases, where the gap between the relevant information and the place that it’s needed is small, RNNs can learn to use the past information.
+Иногда нам нужно только взглянуть на недавнюю информацию, чтобы выполнить текущую задачу. Например, рассмотрим языковую модель, пытающуюся предсказать следующее слово на основе предыдущих. Если мы пытаемся предсказать последнее слово в «облаках в _sky_», нам не нужен какой-либо дальнейший контекст - вполне очевидно, что следующим словом будет небо. В таких случаях, когда разрыв между соответствующей информацией и местом, в котором она необходима, невелик, RNN могут научиться использовать прошлую информацию.
 
  ![](/images/724834cc384c9fae8c3b3aff0d4a7a3a.png) 
 
-But there are also cases where we need more context. Consider trying to predict the last word in the text “I grew up in France… I speak fluent _French_ .” Recent information suggests that the next word is probably the name of a language, but if we want to narrow down which language, we need the context of France, from further back. It’s entirely possible for the gap between the relevant information and the point where it is needed to become very large.
+Но есть также случаи, когда нам нужно больше контекста. Подумайте о том, чтобы попытаться предсказать последнее слово в тексте: «Я вырос во Франции. Я свободно говорю по-французски.» Недавняя информация говорит о том, что следующим словом, вероятно, является название языка, но если мы хотим сузить язык, нам нужен контекст Франции, если смотреть дальше. Вполне возможно, что разрыв между соответствующей информацией и точкой, в которой она необходима, станет очень большим.
 
-Unfortunately, as that gap grows, RNNs become unable to learn to connect the information.
+К сожалению, по мере того, как этот разрыв увеличивается, RNN становятся неспособными научиться соединять информацию.
 
  ![Neural networks struggle with long term dependencies.](/images/6b911b2e1cb16cf47bf0f86257912c8e.png) 
 
-In theory, RNNs are absolutely capable of handling such “long-term dependencies.” A human could carefully pick parameters for them to solve toy problems of this form. Sadly, in practice, RNNs don’t seem to be able to learn them. The problem was explored in depth by [Hochreiter (1991) \[German\]](http://people.idsia.ch/~juergen/SeppHochreiter1991ThesisAdvisorSchmidhuber.pdf) and [Bengio, et al. (1994)](http://www-dsi.ing.unifi.it/~paolo/ps/tnn-94-gradient.pdf) , who found some pretty fundamental reasons why it might be difficult.
+Теоретически, RNN абсолютно способны обрабатывать такие «долгосрочные зависимости». Человек может тщательно подобрать параметры для них, чтобы решить игрушечные проблемы этой формы. К сожалению, на практике RNN, кажется, не в состоянии изучить их. Проблема была глубоко изучена [Hochreiter (1991) \[German\]](http://people.idsia.ch/~juergen/SeppHochreiter1991ThesisAdvisorSchmidhuber.pdf) а также [Bengio, et al. (1994)](http://www-dsi.ing.unifi.it/~paolo/ps/tnn-94-gradient.pdf), кто нашел несколько довольно фундаментальных причин, почему это может быть трудно.
 
-Thankfully, LSTMs don’t have this problem!
+К счастью, у LSTM нет этой проблемы!
 
-## LSTM Networks
+## LSTM Сети
 
-Long Short Term Memory networks – usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies. They were introduced by [Hochreiter & Schmidhuber (1997)](http://www.bioinf.jku.at/publications/older/2604.pdf) , and were refined and popularized by many people in following work. [1](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#fn1) They work tremendously well on a large variety of problems, and are now widely used.
+Сети с долговременной кратковременной памятью, обычно называемые «LSTM», представляют собой особый тип RNN, способный изучать долгосрочные зависимости. Они были представлены [Hochreiter & Schmidhuber (1997)](http://www.bioinf.jku.at/publications/older/2604.pdf) и были усовершенствованы и популяризированы многими людьми в следующей работе. [1](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#fn1) Они отлично работают по широкому кругу проблем и в настоящее время широко используются.
 
-LSTMs are explicitly designed to avoid the long-term dependency problem. Remembering information for long periods of time is practically their default behavior, not something they struggle to learn!
+LSTM явно разработаны, чтобы избежать проблемы долгосрочной зависимости. Запоминание информации в течение длительных периодов времени - это практически поведение по умолчанию, а не то, чему они пытаются научиться!
 
-All recurrent neural networks have the form of a chain of repeating modules of neural network. In standard RNNs, this repeating module will have a very simple structure, such as a single tanh layer.
+Все рекуррентные нейронные сети имеют форму цепочки повторяющихся модулей нейронной сети. В стандартных RNN этот повторяющийся модуль будет иметь очень простую структуру, такую как один слой tanh.
 
  ![](/images/bce0d99e8bc969fa3c2ffa99f93935c5.png)  **The repeating module in a standard RNN contains a single layer.** 
 
@@ -150,6 +150,7 @@ Before this post, I practiced explaining LSTMs during two seminar series I taugh
 * * *
 
 1.  In addition to the original authors, a lot of people contributed to the modern LSTM. A non-comprehensive list is: Felix Gers, Fred Cummins, Santiago Fernandez, Justin Bayer, Daan Wierstra, Julian Togelius, Faustino Gomez, Matteo Gagliolo, and [Alex Graves](https://scholar.google.com/citations?user=DaFHynwAAAAJ&hl=en) . [↩](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#fnref1)
+
 
 
 
