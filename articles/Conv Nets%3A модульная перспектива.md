@@ -140,7 +140,7 @@ Similarly, if we consider a 2-dimensional convolutional layer, with inputs \\(\\
 
 We can, again, write down the outputs in terms of the inputs:
 
- \\\[y\_{n,m} = A\\left(\\begin{array}{ccc} x\_{n,~m}, & x\_{n+1,~m},& ...,~\\\\ x\_{n,~m+1}, & x\_{n+1,~m+1}, & ..., ~\\\\ &...\\\\\\end{array}\\right)\\\] 
+ \\\[ y\_{n,m} = A\\left(\\begin{array}{ccc} x\_{n,~m}, & x\_{n+1,~m},& ...,~\\\\ x\_{n,~m+1}, & x\_{n+1,~m+1}, & ..., ~\\\\ &...\\\\\\end{array}\\right) \\\] 
 
 For example:
 
