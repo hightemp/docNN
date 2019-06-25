@@ -105,15 +105,15 @@ LSTM имеет возможность удалять или добавлять 
 
 Наконец, нам нужно решить, что мы собираемся выводить. Этот вывод будет основан на состоянии нашей ячейки, но будет отфильтрованной версией. Сначала мы запускаем сигмовидный слой, который решает, какие части состояния ячейки мы будем выводить. Затем мы помещаем состояние ячейки через \\(\\tanh\\) (чтобы значения оказались между \\(-1\\) и \\(1\\)) и умножаем его на выход sigmoid gate, так что мы выводим только те части, которые мы решили.
 
-For the language model example, since it just saw a subject, it might want to output information relevant to a verb, in case that’s what is coming next. For example, it might output whether the subject is singular or plural, so that we know what form a verb should be conjugated into if that’s what follows next.
+Для примера языковой модели, поскольку он только что увидел предмет, он может захотеть вывести информацию, относящуюся к глаголу, на случай, если это будет следующим. Например, он может выводить, является ли объект единственным или множественным, так что мы знаем, в какую форму должен быть спряжен глагол, если это будет следующим.
 
  ![](/images/c3c06077f1a4e436ac442e0623ac284e.png) 
 
-## Variants on Long Short Term Memory
+## Варианты на долгосрочную память
 
-What I’ve described so far is a pretty normal LSTM. But not all LSTMs are the same as the above. In fact, it seems like almost every paper involving LSTMs uses a slightly different version. The differences are minor, but it’s worth mentioning some of them.
+То, что я описал до сих пор, это довольно нормальный LSTM. Но не все LSTM такие же, как указано выше. На самом деле, похоже, что почти во всех документах с LSTM используется немного другая версия. Различия незначительны, но стоит упомянуть некоторые из них.
 
-One popular LSTM variant, introduced by [Gers & Schmidhuber (2000)](ftp://ftp.idsia.ch/pub/juergen/TimeCount-IJCNN2000.pdf) , is adding “peephole connections.” This means that we let the gate layers look at the cell state.
+Один из популярных вариантов LSTM, представленный [Gers & Schmidhuber (2000)](ftp://ftp.idsia.ch/pub/juergen/TimeCount-IJCNN2000.pdf), добавляет «соединения с глазками». Это означает, что мы позволим слоям ворот взглянуть на состояние клетки.
 
  ![](/images/838ddfa82b7c6886c3687fa69574c212.png) 
 
