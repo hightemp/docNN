@@ -56,13 +56,13 @@
 
 В наших предыдущих примерах мы использовали одномерные сверточные слои. Однако сверточные слои также могут работать с многомерными данными. Фактически, самые известные успехи сверточных нейронных сетей - это применение двумерных сверточных нейронных сетей для распознавания изображений.
 
-In a 2-dimensional convolutional layer, instead of looking at segments, \\(A\\) will now look at patches.
+В двумерном сверточном слое вместо просмотра сегментов \\(A\\) теперь будет смотреть на патчи.
 
-For each patch, \\(A\\) will compute features. For example, it might learn to detect the presence of an edge. Or it might learn to detect a texture. Or perhaps a contrast between two colors.
+Для каждого патча \\(A\\) будет вычислять функции. Например, он может научиться обнаруживать наличие ребра. Или это может научиться обнаруживать текстуру. Или, может быть, контраст между двумя цветами.
 
  ![](/images/99e34372a582842947dd5437cc46c26d.png) 
 
-In the previous example, we fed the output of our convolutional layer into a fully-connected layer. But we can also compose two convolutional layers, as we did in the one dimensional case.
+В предыдущем примере мы передавали вывод нашего сверточного слоя в полностью связанный слой. Но мы также можем составить два сверточных слоя, как мы это делали в одномерном случае.
 
  ![](/images/5bab67340789f49120933392e45e3c0f.png) 
 
