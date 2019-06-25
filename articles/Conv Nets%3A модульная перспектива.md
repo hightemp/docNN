@@ -30,9 +30,9 @@
 
  ![](/images/fbcd03e2376115c47ca4807efc8a0692.png) 
 
-In the above example, \\(A\\) only looked at segments consisting of two points. This isn’t realistic. Usually, a convolution layer’s window would be much larger.
+В приведенном выше примере \\(A\\) просматривал только сегменты, состоящие из двух точек. Это нереально. Обычно окно сверточного слоя будет намного больше.
 
-In the following example, \\(A\\) looks at 3 points. That isn’t realistic either – sadly, it’s tricky to visualize \\(A\\) connecting to lots of points.
+В следующем примере \\(A\\) смотрит на 3 пункта. Это также нереально - к сожалению, сложно представить, как можно соединиться со многими точками.
 
  ![](/images/8edca52d8fb6135ad47059206dfd2360.png) 
 
