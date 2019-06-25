@@ -123,35 +123,35 @@ LSTM имеет возможность удалять или добавлять 
 
  ![](/images/89bf31964d7553fa78bba9711c3d24e3.png) 
 
-A slightly more dramatic variation on the LSTM is the Gated Recurrent Unit, or GRU, introduced by [Cho, et al. (2014)](http://arxiv.org/pdf/1406.1078v3.pdf) . It combines the forget and input gates into a single “update gate.” It also merges the cell state and hidden state, and makes some other changes. The resulting model is simpler than standard LSTM models, and has been growing increasingly popular.
+Немного более драматичным вариантом LSTM является Gated Recurrent Unit, или GRU, представленный [Cho, et al. (2014)](http://arxiv.org/pdf/1406.1078v3.pdf). Он объединяет входные и выходные данные в один «гейт обновления». Он также объединяет состояние ячейки и скрытое состояние и вносит некоторые другие изменения. Полученная модель проще, чем стандартные модели LSTM, и становится все более популярной.
 
  ![A gated recurrent unit neural network.](/images/f2716bc289734d8b545926b38a224692.png) 
 
-These are only a few of the most notable LSTM variants. There are lots of others, like Depth Gated RNNs by [Yao, et al. (2015)](http://arxiv.org/pdf/1508.03790v2.pdf) . There’s also some completely different approach to tackling long-term dependencies, like Clockwork RNNs by [Koutnik, et al. (2014)](http://arxiv.org/pdf/1402.3511v1.pdf) .
+Это только некоторые из наиболее заметных вариантов LSTM. Есть много других, таких как RNN с ограничением по глубине [Yao, et al. (2015)](http://arxiv.org/pdf/1508.03790v2.pdf). Существует также какой-то совершенно другой подход к решению долгосрочных зависимостей, такой как Clockwork RNNs [Koutnik, et al. (2014)](http://arxiv.org/pdf/1402.3511v1.pdf).
 
-Which of these variants is best? Do the differences matter? [Greff, et al. (2015)](http://arxiv.org/pdf/1503.04069.pdf) do a nice comparison of popular variants, finding that they’re all about the same. [Jozefowicz, et al. (2015)](http://jmlr.org/proceedings/papers/v37/jozefowicz15.pdf) tested more than ten thousand RNN architectures, finding some that worked better than LSTMs on certain tasks.
+Какой из этих вариантов лучше? Различия имеют значение? [Грефф и др. (2015)](http://arxiv.org/pdf/1503.04069.pdf) проведите хорошее сравнение популярных вариантов, обнаружив, что все они примерно одинаковы. [Jozefowicz, et al. (2015)](http://jmlr.org/proceedings/papers/v37/jozefowicz15.pdf) протестировал более десяти тысяч архитектур RNN, и нашел некоторые, которые работали лучше, чем LSTM, в определенных задачах.
 
-## Conclusion
+## Заключение
 
-Earlier, I mentioned the remarkable results people are achieving with RNNs. Essentially all of these are achieved using LSTMs. They really work a lot better for most tasks!
+Ранее я упоминал о замечательных результатах, которых достигают люди с RNN. По сути, все это достигается с помощью LSTM. Они действительно работают намного лучше для большинства задач!
 
-Written down as a set of equations, LSTMs look pretty intimidating. Hopefully, walking through them step by step in this essay has made them a bit more approachable.
+Записанные в виде системы уравнений LSTM выглядят довольно устрашающе. Надеюсь, шаг за шагом пройдя через это эссе, сделало их немного более доступными.
 
-LSTMs were a big step in what we can accomplish with RNNs. It’s natural to wonder: is there another big step? A common opinion among researchers is: “Yes! There is a next step and it’s attention!” The idea is to let every step of an RNN pick information to look at from some larger collection of information. For example, if you are using an RNN to create a caption describing an image, it might pick a part of the image to look at for every word it outputs. In fact, [Xu, _et al._ (2015)](http://arxiv.org/pdf/1502.03044v2.pdf) do exactly this – it might be a fun starting point if you want to explore attention! There’s been a number of really exciting results using attention, and it seems like a lot more are around the corner…
+LSTM были большим шагом в том, что мы можем сделать с RNN. Естественно задаться вопросом: есть ли еще один большой шаг? Среди исследователей распространено мнение: «Да! Есть следующий шаг, и это внимание! Идея состоит в том, чтобы позволить каждому шагу RNN выбирать информацию для просмотра из некоторого большего набора информации. Например, если вы используете RNN для создания заголовка, описывающего изображение, он может выбрать часть изображения для просмотра каждого слова, которое он выводит. Фактически, [Xu, _et al._ (2015)](http://arxiv.org/pdf/1502.03044v2.pdf) делают именно это - это может быть интересной отправной точкой, если вы хотите привлечь внимание! Был целый ряд действительно захватывающих результатов с привлечением внимания, и кажется, что намного больше не за горами...
 
-Attention isn’t the only exciting thread in RNN research. For example, Grid LSTMs by [Kalchbrenner, _et al._ (2015)](http://arxiv.org/pdf/1507.01526v1.pdf) seem extremely promising. Work using RNNs in generative models – such as [Gregor, _et al._ (2015)](http://arxiv.org/pdf/1502.04623.pdf) , [Chung, _et al._ (2015)](http://arxiv.org/pdf/1506.02216v3.pdf) , or [Bayer & Osendorfer (2015)](http://arxiv.org/pdf/1411.7610v3.pdf) – also seems very interesting. The last few years have been an exciting time for recurrent neural networks, and the coming ones promise to only be more so!
+Внимание - не единственная захватывающая тема в исследованиях RNN. Например, сеточные LSTM от [Kalchbrenner, _et al._ (2015)](http://arxiv.org/pdf/1507.01526v1.pdf) представляются чрезвычайно многообещающими. Работа с использованием RNN в генеративных моделях, таких как [Gregor, _et al._ (2015)](http://arxiv.org/pdf/1502.04623.pdf), [Chung, _et al._ (2015)]( http://arxiv.org/pdf/1506.02216v3.pdf) или [Bayer & Osendorfer (2015)](http://arxiv.org/pdf/1411.7610v3.pdf) - также представляется очень интересным. Последние несколько лет были захватывающим временем для повторяющихся нейронных сетей, а ближайшие обещают быть только больше!
 
-## Acknowledgments
+## Подтверждения
 
-I’m grateful to a number of people for helping me better understand LSTMs, commenting on the visualizations, and providing feedback on this post.
+Я благодарен ряду людей за то, что они помогли мне лучше понять LSTM, прокомментировали визуализации и предоставили отзывы об этом посте.
 
-I’m very grateful to my colleagues at Google for their helpful feedback, especially [Oriol Vinyals](http://research.google.com/pubs/OriolVinyals.html) , [Greg Corrado](http://research.google.com/pubs/GregCorrado.html) , [Jon Shlens](http://research.google.com/pubs/JonathonShlens.html) , [Luke Vilnis](http://people.cs.umass.edu/~luke/) , and [Ilya Sutskever](http://www.cs.toronto.edu/~ilya/) . I’m also thankful to many other friends and colleagues for taking the time to help me, including [Dario Amodei](https://www.linkedin.com/pub/dario-amodei/4/493/393) , and [Jacob Steinhardt](http://cs.stanford.edu/~jsteinhardt/) . I’m especially thankful to [Kyunghyun Cho](http://www.kyunghyuncho.me/) for extremely thoughtful correspondence about my diagrams.
+Я очень благодарен своим коллегам в Google за полезные отзывы, особенно [Oriol Vinyals](http://research.google.com/pubs/OriolVinyals.html), [Грег Коррадо](http: // research). google.com/pubs/GregCorrado.html), [Джон Шленс](http://research.google.com/pubs/JonathonShlens.html), [Люк Вилнис](http://people.cs.umass.edu/ ~ Люк /) и [Илья Суцкевер](http://www.cs.toronto.edu/~ilya/). Я также благодарен многим другим друзьям и коллегам за то, что они нашли время, чтобы помочь мне, включая [Дарио Амодей](https://www.linkedin.com/pub/dario-amodei/4/493/393), и [Джейкоб Стейнхардт](http://cs.stanford.edu/~jsteinhardt/). Я особенно благодарен [Kyunghyun Cho](http://www.kyunghyuncho.me/) за чрезвычайно вдумчивую переписку о моих диаграммах.
 
-Before this post, I practiced explaining LSTMs during two seminar series I taught on neural networks. Thanks to everyone who participated in those for their patience with me, and for their feedback.
+До этого поста я практиковался в объяснении LSTM во время двух семинаров, которые я преподавал в нейронных сетях. Спасибо всем, кто участвовал в них, за их терпение ко мне и за отзывы.
 
 * * *
 
-1.  In addition to the original authors, a lot of people contributed to the modern LSTM. A non-comprehensive list is: Felix Gers, Fred Cummins, Santiago Fernandez, Justin Bayer, Daan Wierstra, Julian Togelius, Faustino Gomez, Matteo Gagliolo, and [Alex Graves](https://scholar.google.com/citations?user=DaFHynwAAAAJ&hl=en) . [↩](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#fnref1)
+1. Помимо оригинальных авторов, многие люди внесли свой вклад в современную LSTM. Неполный список: Феликс Герс, Фред Камминс, Сантьяго Фернандес, Джастин Байер, Даан Вирстра, Джулиан Тогелиус, Фаустино Гомес, Маттео Гальоло и [Алекс Грейвс](https://scholar.google.com/citations?user=DaFHynwAAAAJ&hl=en) . [↩](https://colah.github.io/posts/2015-08-Understanding-LSTMs/#fnref1)
 
 
 
