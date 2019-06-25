@@ -95,11 +95,11 @@ LSTM имеет возможность удалять или добавлять 
 
  ![](/images/5a460ea6f112de7332ca9584300c6e9c.png) 
 
-It’s now time to update the old cell state, \\(C\_{t-1}\\) , into the new cell state \\(C\_t\\) . The previous steps already decided what to do, we just need to actually do it.
+Теперь пришло время обновить старое состояние ячейки, \\(C\_{t-1}\\), в новое состояние ячейки \\(C\_t\\). Предыдущие шаги уже решили, что делать, нам просто нужно сделать это на самом деле.
 
-We multiply the old state by \\(f\_t\\) , forgetting the things we decided to forget earlier. Then we add \\(i\_t\*\\tilde{C}\_t\\) . This is the new candidate values, scaled by how much we decided to update each state value.
+Мы умножаем старое состояние на \\(f\_t\\), забывая вещи, которые мы решили забыть ранее. Затем мы добавляем \\(i\_t\*\\tilde{C}\_t\\). Это новые значения кандидатов, в зависимости от того, насколько мы решили обновить каждое значение состояния.
 
-In the case of the language model, this is where we’d actually drop the information about the old subject’s gender and add the new information, as we decided in the previous steps.
+В случае языковой модели, это то место, где мы фактически отбрасываем информацию о поле старого субъекта и добавляем новую информацию, как мы решили на предыдущих шагах.
 
  ![](/images/830f08d8fff0c45ff6350c8c473b50ba.png) 
 
