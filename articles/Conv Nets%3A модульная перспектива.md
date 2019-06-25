@@ -1,33 +1,32 @@
 # Conv Nets: модульная перспектива
-## Introduction
-(1)
+## Вступление
 
-In the last few years, deep neural networks have lead to breakthrough results on a variety of pattern recognition problems, such as computer vision and voice recognition. One of the essential components leading to these results has been a special kind of neural network called a _convolutional neural network_ .
+В последние несколько лет глубокие нейронные сети привели к прорывным результатам по ряду проблем распознавания образов, таких как компьютерное зрение и распознавание голоса. Одним из важных компонентов, приводящих к этим результатам, была особая разновидность нейронной сети, называемая _конволюционная нейронная сеть_.
 
-At its most basic, convolutional neural networks can be thought of as a kind of neural network that uses many identical copies of the same neuron. [1](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn1) This allows the network to have lots of neurons and express computationally large models while keeping the number of actual parameters – the values describing how neurons behave – that need to be learned fairly small.
+По своей сути, сверточные нейронные сети можно рассматривать как разновидность нейронной сети, которая использует много идентичных копий одного и того же нейрона. [1](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn1) Это позволяет сети иметь много нейронов и выражать вычислительно большие модели, сохраняя при этом количество фактических параметров - значения, описывающие, как ведут себя нейроны, - которые нужно выучить довольно мало.
 
  ![](/images/5bab67340789f49120933392e45e3c0f.png) 
- A 2D Convolutional Neural Network
+ 2D сверточная нейронная сеть
 
-This trick of having multiple copies of the same neuron is roughly analogous to the abstraction of functions in mathematics and computer science. When programming, we write a function once and use it in many places – not writing the same code a hundred times in different places makes it faster to program, and results in fewer bugs. Similarly, a convolutional neural network can learn a neuron once and use it in many places, making it easier to learn the model and reducing error.
+Этот трюк с несколькими копиями одного и того же нейрона примерно аналогичен абстракции функций в математике и информатике. При программировании мы пишем функцию один раз и используем ее во многих местах - если не писать один и тот же код сто раз в разных местах, это ускоряет программирование и приводит к меньшему количеству ошибок. Точно так же сверточная нейронная сеть может однажды выучить нейрон и использовать его во многих местах, упрощая изучение модели и уменьшая количество ошибок.
 
-## Structure of Convolutional Neural Networks
+## Структура сверточных нейронных сетей
 
-Suppose you want a neural network to look at audio samples and predict whether a human is speaking or not. Maybe you want to do more analysis if someone is speaking.
+Предположим, вы хотите, чтобы нейронная сеть смотрела на аудиосэмплы и предсказывала, говорит человек или нет. Может быть, вы хотите сделать больше анализа, если кто-то говорит.
 
-You get audio samples at different points in time. The samples are evenly spaced.
+Вы получаете аудио образцы в разные моменты времени. Образцы расположены равномерно.
 
  ![](/images/3e84b8472f1a16756cadfd92cc6a1b53.png) 
 
-The simplest way to try and classify them with a neural network is to just connect them all to a fully-connected layer. There are a bunch of different neurons, and every input connects to every neuron.
+Самый простой способ попытаться классифицировать их с помощью нейронной сети - просто подключить их все к полностью подключенному слою. Существует множество разных нейронов, и каждый вход соединяется с каждым нейроном.
 
  ![](/images/5eb9f54084c0376a1d31a82bc8408e55.png) 
 
-A more sophisticated approach notices a kind of _symmetry_ in the properties it’s useful to look for in the data. We care a lot about local properties of the data: What frequency of sounds are there around a given time? Are they increasing or decreasing? And so on.
+Более сложный подход обращает внимание на своего рода _симметрию_ в свойствах, которые полезно искать в данных. Мы очень заботимся о локальных свойствах данных: какая частота звуков присутствует в данное время? Они увеличиваются или уменьшаются? И так далее.
 
-We care about the same properties at all points in time. It’s useful to know the frequencies at the beginning, it’s useful to know the frequencies in the middle, and it’s also useful to know the frequencies at the end. Again, note that these are local properties, in that we only need to look at a small window of the audio sample in order to determine them.
+Мы заботимся об одинаковых свойствах во все моменты времени. Полезно знать частоты в начале, полезно знать частоты в середине, а также полезно знать частоты в конце. Опять же, обратите внимание, что это локальные свойства, так как нам нужно только взглянуть на небольшое окно аудиосэмпла, чтобы определить их.
 
-So, we can create a group of neurons, \\(A\\) , that look at small time segments of our data. [2](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn2)  \\(A\\) looks at all such segments, computing certain _features_ . Then, the output of this _convolutional layer_ is fed into a fully-connected layer, \\(F\\) .
+Таким образом, мы можем создать группу нейронов, \\(A\\), которые смотрят на небольшие временные сегменты наших данных. [2](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn2) \\(A\\) просматривает все такие сегменты, вычисляя определенные _функции_. Затем выход этого _сверточного слоя_ подается в полностью связанный слой \\(F\\).
 
  ![](/images/fbcd03e2376115c47ca4807efc8a0692.png) 
 
