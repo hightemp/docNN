@@ -66,75 +66,79 @@
 
  ![](/images/5bab67340789f49120933392e45e3c0f.png) 
 
-We can also do max pooling in two dimensions. Here, we take the maximum of features over a small patch.
+Мы также можем сделать максимальное объединение в двух измерениях. Здесь мы берем максимум возможностей за небольшой патч.
 
-What this really boils down to is that, when considering an entire image, we don’t care about the exact position of an edge, down to a pixel. It’s enough to know where it is to within a few pixels.
+На самом деле это сводится к тому, что при рассмотрении всего изображения мы не заботимся о точном положении края, вплоть до пикселя. Достаточно знать, где он находится с точностью до нескольких пикселей.
 
  ![](/images/9d85a42c7a864c0d810302b7dac8124e.png) 
 
-Three-dimensional convolutional networks are also sometimes used, for data like videos or volumetric data (eg. 3D medical scans). However, they are not very widely used, and much harder to visualize.
+Трехмерные сверточные сети также иногда используются для данных, таких как видео или объемные данные (например, трехмерные медицинские сканы). Однако они не очень широко используются, и их гораздо сложнее визуализировать.
 
-Now, we previously said that \\(A\\) was a group of neurons. We should be a bit more precise about this: what is \\(A\\) exactly?
+Теперь мы ранее говорили, что \\(A\\) была группа нейронов. Мы должны быть немного более точными в этом: что такое \\(A\\) точно?
 
-In traditional convolutional layers, \\(A\\) is a bunch of neurons in parallel, that all get the same inputs and compute different features.
+В традиционных сверточных слоях \\(A\\) - это параллельная группа нейронов, которые все получают одинаковые входные данные и вычисляют различные функции.
 
-For example, in a 2-dimensional convolutional layer, one neuron might detect horizontal edges, another might detect vertical edges, and another might detect green-red color contrasts.
+Например, в двумерном сверточном слое один нейрон может обнаруживать горизонтальные края, другой - вертикальные, а другой - зелено-красные контрасты.
 
  ![](/images/7efaf64b70dca12e35445b466db5ff1e.png) 
 
-That said, in the recent paper ‘Network in Network’ ( [Lin _et al._ (2013)](http://arxiv.org/abs/1312.4400) ), a new “Mlpconv” layer is proposed. In this model, \\(A\\) would have multiple layers of neurons, with the final layer outputting higher level features for the region. In the paper, the model achieves some very impressive results, setting new state of the art on a number of benchmark datasets.
+Тем не менее, в недавней статье «Сеть в сети» ([Lin _et al._ (2013)](http://arxiv.org/abs/1312.4400)) предложен новый слой «Mlpconv». , В этой модели \\(A\\) будет иметь несколько слоев нейронов, а последний слой будет выводить объекты более высокого уровня для региона. В статье модель достигает очень впечатляющих результатов, устанавливая новый уровень техники в ряде эталонных наборов данных.
 
  ![](/images/2491522bf3ad43cc76f9e04bff0101e5.png) 
 
-That said, for the purposes of this post, we will focus on standard convolutional layers. There’s already enough for us to consider there!
+Тем не менее, для целей этого поста мы сосредоточимся на стандартных сверточных слоях. Нам уже достаточно рассмотреть это!
 
-## Results of Convolutional Neural Networks
+## Результаты сверточных нейронных сетей
 
-Earlier, we alluded to recent breakthroughs in computer vision using convolutional neural networks. Before we go on, I’d like to briefly discuss some of these results as motivation.
+Ранее мы ссылались на недавние достижения в области компьютерного зрения с использованием сверточных нейронных сетей. Прежде чем мы продолжим, я хотел бы кратко обсудить некоторые из этих результатов в качестве мотивации.
 
-In 2012, Alex Krizhevsky, Ilya Sutskever, and Geoff Hinton blew existing image classification results out of the water ( [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) ).
+В 2012 году Алекс Крижевский, Илья Суцкевер и Джефф Хинтон взорвали существующие результаты классификации изображений из воды ( [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) ).
 
-Their progress was the result of combining together a bunch of different pieces. They used GPUs to train a very large, deep, neural network. They used a new kind of neuron (ReLUs) and a new technique to reduce a problem called ‘overfitting’ (DropOut). They used a very large dataset with lots of image categories ( [ImageNet](http://www.image-net.org/) ). And, of course, it was a convolutional neural network.
+Их прогресс был результатом объединения кучки разных частей. Они использовали графические процессоры для обучения очень большой, глубокой, нейронной сети. Они использовали новый тип нейрона (ReLU) и новую технику, чтобы уменьшить проблему, называемую «переоснащение» (DropOut). Они использовали очень большой набор данных с большим количеством категорий изображений ( [ImageNet](http://www.image-net.org/) ). И, конечно, это была сверточная нейронная сеть.
 
-Their architecture, illustrated below, was very deep. It has 5 convolutional layers, [3](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn3) with pooling interspersed, and three fully-connected layers. The early layers are split over the two GPUs.
+Их архитектура, показанная ниже, была очень глубокой. Он имеет 5 сверточных слоев, [3](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn3) с объединенным пулом и три полностью связанных слоя. Ранние уровни разделены на два графических процессора.
+ 
+ ![](/images/05bc84347432d78ea35d31d653556023.png) 
+ из [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) 
 
- ![](/images/05bc84347432d78ea35d31d653556023.png) From [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) 
+Они обучили свою сеть классифицировать изображения на тысячу разных категорий.
 
-They trained their network to classify images into a thousand different categories.
+Случайно угадывая, можно угадать правильный ответ в 0,1% случаев. Модель Крижевского _et al._ может дать правильный ответ в 63% случаев. Кроме того, один из 5 лучших ответов, которые он дает, правильный в 85% случаев!
 
-Randomly guessing, one would guess the correct answer 0.1% of the time. Krizhevsky, _et al._ ’s model is able to give the right answer 63% of the time. Further, one of the top 5 answers it gives is right 85% of the time!
+ ![](/images/88cd1e0db30c06fb510b8108f8dbbba6.png) 
+ Вверху: 4 правильно классифицированных примера. Внизу: 4 неправильно классифицированных примера. У каждого примера есть изображение, сопровождаемое его меткой, за которой следуют 5 главных догадок с вероятностями. 
+ Из [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf).
 
- ![](/images/88cd1e0db30c06fb510b8108f8dbbba6.png) Top: 4 correctly classified examples. Bottom: 4 incorrectly classified examples. Each example has an image, followed by its label, followed by the top 5 guesses with probabilities. From [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) .
+Даже некоторые из его ошибок кажутся мне вполне разумными!
 
-Even some of its errors seem pretty reasonable to me!
+Мы также можем изучить то, чему научится делать первый уровень сети.
 
-We can also examine what the first layer of the network learns to do.
+Напомним, что сверточные слои были разделены между двумя графическими процессорами. Информация не перемещается назад и вперед по каждому слою, поэтому разделенные стороны отсоединяются по-настоящему. Оказывается, что каждый раз, когда модель запускается, обе стороны специализируются.
 
-Recall that the convolutional layers were split between the two GPUs. Information doesn’t go back and forth each layer, so the split sides are disconnected in a real way. It turns out that, every time the model is run, the two sides specialize.
+ ![](/images/7b7d120378c1c9ce9540c1c16d456ff3.png) 
+ Фильтры учились по первому сверточному слою. Верхняя половина соответствует слою на одном графическом процессоре, нижняя - на другом. Из [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) 
 
- ![](/images/7b7d120378c1c9ce9540c1c16d456ff3.png) Filters learned by the first convolutional layer. The top half corresponds to the layer on one GPU, the bottom on the other. From [Krizehvsky _et al._ (2012)](http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) 
+Нейроны с одной стороны фокусируются на черно-белом изображении, обучаясь распознавать края разной ориентации и размеров. Нейроны с другой стороны специализируются на цвете и текстуре, обнаруживая цветовые контрасты и узоры. [4](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn4) Помните, что нейроны _cлучайно_ инициализированы. Никто из людей не пошел и не установил их в качестве детекторов краев или для разделения таким образом. Это возникло просто из-за обучения сети классификации изображений.
 
-Neurons in one side focus on black and white, learning to detect edges of different orientations and sizes. Neurons on the other side specialize on color and texture, detecting color contrasts and patterns. [4](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fn4) Remember that the neurons are _randomly_ initialized. No human went and set them to be edge detectors, or to split in this way. It arose simply from training the network to classify images.
+Эти замечательные результаты (и другие захватывающие результаты того времени) были только началом. За ними быстро последовало множество других работ, тестирующих модифицированные подходы и постепенно улучшающих результаты, или применяя их в других областях. И, в дополнение к сообществу нейронных сетей, многие в сообществе компьютерного зрения приняли глубокие сверточные нейронные сети.
 
-These remarkable results (and other exciting results around that time) were only the beginning. They were quickly followed by a lot of other work testing modified approaches and gradually improving the results, or applying them to other areas. And, in addition to the neural networks community, many in the computer vision community have adopted deep convolutional neural networks.
+Сверточные нейронные сети являются важным инструментом в компьютерном зрении и современном распознавании образов.
 
-Convolutional neural networks are an essential tool in computer vision and modern pattern recognition.
+## Формализация сверточных нейронных сетей
 
-## Formalizing Convolutional Neural Networks
-
-Consider a 1-dimensional convolutional layer with inputs \\(\\{x\_n\\}\\) and outputs \\(\\{y\_n\\}\\) :
+Рассмотрим одномерный сверточный слой с входами \\(\\{x\_n\\}\\) и выходами \\(\\{y\_n \\}\\):
 
  ![](/images/7be8a90f11666f023ad5fcc55d2a92e7.png) 
 
-It’s relatively easy to describe the outputs in terms of the inputs:
+Относительно легко описать результаты в терминах входных данных:
 
  \\\[y\_n = A(x\_{n}, x\_{n+1}, ...)\\\] 
 
-For example, in the above:
+Например, в приведенном выше:
 
  \\\[y\_0 = A(x\_0, x\_1)\\\]  \\\[y\_1 = A(x\_1, x\_2)\\\] 
 
-Similarly, if we consider a 2-dimensional convolutional layer, with inputs \\(\\{x\_{n,m}\\}\\) and outputs \\(\\{y\_{n,m}\\}\\) :
+Аналогичным образом, если мы рассмотрим двумерный сверточный слой, с входами \\(\\{x\_{n, m}\\}\\) и выходами \\(\\{y\_{n, m}\\}\\):
 
  ![](/images/e800550c411136d69f5266e16559a2f5.png) 
 
