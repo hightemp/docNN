@@ -36,25 +36,25 @@
 
  ![](/images/8edca52d8fb6135ad47059206dfd2360.png) 
 
-One very nice property of convolutional layers is that they’re composable. You can feed the output of one convolutional layer into another. With each layer, the network can detect higher-level, more abstract features.
+Одним из очень хороших свойств сверточных слоев является то, что они являются композитными. Вы можете передать вывод одного сверточного слоя в другой. На каждом уровне сеть может обнаруживать более абстрактные и высокоуровневые функции.
 
-In the following example, we have a new group of neurons, \\(B\\) . \\(B\\) is used to create another convolutional layer stacked on top of the previous one.
+В следующем примере у нас есть новая группа нейронов, \\(B\\). \\(B\\) используется для создания другого сверточного слоя, наложенного поверх предыдущего.
 
  ![](/images/3fd1a47ec0ce231670d88ce1d4beb9af.png) 
 
-Convolutional layers are often interweaved with pooling layers. In particular, there is a kind of layer called a max-pooling layer that is extremely popular.
+Сверточные слои часто переплетаются с объединяющимися слоями. В частности, существует своего рода слой, называемый слоем max-pooling, который очень популярен.
 
-Often, from a high level perspective, we don’t care about the precise point in time a feature is present. If a shift in frequency occurs slightly earlier or later, does it matter?
+Часто, с точки зрения высокого уровня, мы не заботимся о точном моменте времени, когда функция присутствует. Если сдвиг частоты происходит немного раньше или позже, имеет ли это значение?
 
-A max-pooling layer takes the maximum of features over small blocks of a previous layer. The output tells us if a feature was present in a region of the previous layer, but not precisely where.
+Слой с максимальным пулом берет максимум функций по сравнению с небольшими блоками предыдущего слоя. Вывод сообщает нам, присутствовал ли объект в области предыдущего слоя, но не точно где.
 
-Max-pooling layers kind of “zoom out”. They allow later convolutional layers to work on larger sections of the data, because a small patch after the pooling layer corresponds to a much larger patch before it. They also make us invariant to some very small transformations of the data.
+Слои Max-Pooling как бы уменьшают масштаб. Они позволяют более поздним сверточным слоям работать с большими разделами данных, потому что небольшой патч после пула соответствует гораздо большему патчу перед ним. Они также делают нас инвариантными к некоторым очень маленьким преобразованиям данных.
 
  ![](/images/1174702401de977b1ddb5a6c684cb49b.png) 
 
  ![](/images/ca26196a50220824f0fdf928f7b424a8.png) 
 
-In our previous examples, we’ve used 1-dimensional convolutional layers. However, convolutional layers can work on higher-dimensional data as well. In fact, the most famous successes of convolutional neural networks are applying 2D convolutional neural networks to recognizing images.
+В наших предыдущих примерах мы использовали одномерные сверточные слои. Однако сверточные слои также могут работать с многомерными данными. Фактически, самые известные успехи сверточных нейронных сетей - это применение двумерных сверточных нейронных сетей для распознавания изображений.
 
 In a 2-dimensional convolutional layer, instead of looking at segments, \\(A\\) will now look at patches.
 
