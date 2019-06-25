@@ -140,7 +140,7 @@ Similarly, if we consider a 2-dimensional convolutional layer, with inputs \\(\\
 
 We can, again, write down the outputs in terms of the inputs:
 
- $$y\_{n,m} = A\\left(\\begin{array}{ccc} x\_{n,~m}, & x\_{n+1,~m},& ...,~\\\\ x\_{n,~m+1}, & x\_{n+1,~m+1}, & ..., ~\\\\ &...\\\\\\end{array}\\right)$$ 
+  \\\[y\_{n,m} = A\\left(\\begin{array}{ccc} x\_{n,\~m}, & x\_{n+1,\~m},& ...,\~\\\\ x\_{n,\~m+1}, & x\_{n+1,\~m+1}, & ..., \~\\\\ &...\\\\\\end{array}\\right)\\\] 
 
 For example:
 
@@ -181,6 +181,7 @@ I’m grateful to Eliana Lorch, Aaron Courville, and Sebastian Zany for their co
 3.  They also test using 7 in the paper. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref3) 
     
 4.  This seems to have interesting analogies to rods and cones in the retina. [↩](https://colah.github.io/posts/2014-07-Conv-Nets-Modular/#fnref4)
+
 
 **********
 [Свёрточная нейронная сеть](/tags/%D0%A1%D0%B2%D1%91%D1%80%D1%82%D0%BE%D1%87%D0%BD%D0%B0%D1%8F%20%D0%BD%D0%B5%D0%B9%D1%80%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F%20%D1%81%D0%B5%D1%82%D1%8C.md)
