@@ -117,9 +117,9 @@ LSTM имеет возможность удалять или добавлять 
 
  ![](/images/838ddfa82b7c6886c3687fa69574c212.png) 
 
-The above diagram adds peepholes to all the gates, but many papers will give some peepholes and not others.
+Приведенная выше диаграмма добавляет глазки ко всем воротам, но во многих работах одни глазки даются, а другие нет.
 
-Another variation is to use coupled forget and input gates. Instead of separately deciding what to forget and what we should add new information to, we make those decisions together. We only forget when we’re going to input something in its place. We only input new values to the state when we forget something older.
+Другой вариант - использовать соединенные входные и выходные входы. Вместо того, чтобы отдельно решать, что забыть и к чему мы должны добавить новую информацию, мы принимаем эти решения вместе. Мы только забываем, когда собираемся ввести что-то на свое место. Мы вводим новые значения в состояние, только когда забываем что-то старое.
 
  ![](/images/89bf31964d7553fa78bba9711c3d24e3.png) 
 
