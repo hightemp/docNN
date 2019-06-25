@@ -1,5 +1,6 @@
 # Conv Nets: модульная перспектива
-## Introduction(1)
+## Introduction
+(1)
 
 In the last few years, deep neural networks have lead to breakthrough results on a variety of pattern recognition problems, such as computer vision and voice recognition. One of the essential components leading to these results has been a special kind of neural network called a _convolutional neural network_ .
 
