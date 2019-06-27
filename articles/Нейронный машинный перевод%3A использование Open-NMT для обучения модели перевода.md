@@ -70,24 +70,26 @@ pip install -r requirements.txt
 
 Вот пример, показывающий, как текстовые данные расположены в соответствующих файлах:
 
-Source Files :  
+Исходные файлы: 
 They also bring out a number of Tamil weekly newspapers.  
 They are a hard — working people and most of them work as labourers.  
 Tamil films are also shown in the local cinema halls.  
 There are quite a large number of Malayalees living here.
 
-Target Files :
+Целевые файлы:
 
 तमिल भाषा में वे अनेक समाचार पत्र व पत्रिकाएं भी निकालते हैं .  
 ये लोग काफी परिश्रमी हैं , अधिकांश लोग मजदूरी करते हैं .  
 स्थानीय सिनेमा हालों में तमिल चलचित्रों का प्रदर्शन अक्सर किया जाता है .  
 मलयालम लोगों की बहुत बडी संख्या है .
 
-### Pre-Processing Text Data :
+### Предварительная обработка текстовых данных:
 
-Execute the following command for pre-processing the training and validation data and extract features for training and generate vocabulary files for the model.
+Выполните следующую команду для предварительной обработки данных обучения и проверки и извлечения функций для обучения и создания файлов словаря для модели.
 
+```
 python preprocess.py -train\_src data/src-train.txt -train\_tgt data/tgt-train.txt -valid\_src data/src-val.txt -valid\_tgt data/tgt-val.txt -save\_data data/demo
+```
 
 ### Training the Translator model :
 
