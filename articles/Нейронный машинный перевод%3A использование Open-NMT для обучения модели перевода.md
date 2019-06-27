@@ -197,25 +197,27 @@ PREDICTED : वह अपने बढा लेता है .
 
 BLEU SCore генерируется после подсчета n-граммов в переводе кандидата, совпадающего с n-граммами в тексте ссылки. Порядок слов в этом сравнении не учитывается.
 
-So how would we define a n-gram? Let’s say a 1-gram or uni-gram would mean each individual token and a bi-gram would represent each pair of word.
+Так как бы мы определили n-грамм? Скажем, 1 грамм или униграмма будут означать каждый отдельный токен, а биграмма будет представлять каждую пару слов.
 
-The Code for calculating BLEU Scores, given your predicted candidate file and a reference file given in the GitHub repository, the link to whic is provided at the end of the blog.
+Код для расчета баллов BLEU, с учетом вашего файла предсказанного кандидата и справочного файла, указанного в репозитории GitHub, ссылка на который приведена в конце блога.
 
-Here’s how we run the code to evaluate the model :
+Вот как мы запускаем код для оценки модели:
 
+```
 python calculatebleu.py "pred.txt" "tgt-test.txt"
+```
 
-Where pred.txt is our candidate predicted translation file and tgt-test.txt is the file containing the actual translations in the target language.
+Где pred.txt - это файл перевода, предсказанный кандидатом, а tgt-test.txt - файл, содержащий фактические переводы на целевом языке.
 
-Since our data vocabulary generated with 10k sentences consists only of a few thousand words, the BLEU Score we get on our prediction is quite poor (0.025).
+Поскольку наш словарный запас данных, сгенерированный с помощью 10 тыс. Предложений, состоит всего из нескольких тысяч слов, показатель BLEU, который мы получаем по нашему прогнозу, довольно плохой (0,025).
 
-NOTE : Since our primary aim is focussed at elaborating on the usage of Open-NMT , we use only a small dataset, which is why the evaluation of our predicted translation results is a poor BLEU Score. A BLEU Score around 0.5 implies a decent translation. Increase the training vocabulary manifold by adding several thousands of more examples to improve the score.
+Заметка: Поскольку наша основная цель сосредоточена на разработке использования Open-NMT, мы используем только небольшой набор данных, поэтому оценка наших предсказанных результатов перевода является плохой оценкой BLEU. BLEU Оценка около 0,5 подразумевает приличный перевод. Увеличьте обучающий словарный запас, добавив еще несколько тысяч примеров для улучшения результата.
 
-However Open-NMT allows us to train our own custom translator models between any pair of languages and is very convenient to use.
+Однако Open-NMT позволяет нам обучать наши собственные модели переводчиков между любыми парами языков и очень удобен в использовании.
 
-The Code for generating the BLEU Score and the datasets used in training our model have been provided [here](https://github.com/DataTurks-Engg/Neural_Machine_Translation) .
+Код для генерации Балла BLEU и наборы данных, использованные при обучении нашей модели, были предоставлены [здесь](https://github.com/DataTurks-Engg/Neural_Machine_Translation) .
 
-If you have any queries or suggestions, I would love to hear about it. Please write to me at abhishek.narayanan@dataturks.com.
+Если у вас есть какие-либо вопросы или предложения, я хотел бы услышать об этом. Пожалуйста, напишите мне по адресу abhishek.narayanan@dataturks.com.
 
 **********
 [OpenNMT](/tags/OpenNMT.md)
