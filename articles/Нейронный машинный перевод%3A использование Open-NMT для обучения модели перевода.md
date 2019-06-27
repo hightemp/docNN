@@ -183,19 +183,19 @@ PREDICTED : वह अपने बढा लेता है .
 
 Как видно выше, прогнозы недостаточно хороши, но с меньшим количеством обучающих данных, которые можно использовать для любого перевода в реальном времени. Для выполнения переводов, близких к реальному миру, модель должна быть обучена на большом словарном запасе и около миллиона предложений, что параллельно потребует значительных вычислительных затрат с точки зрения требований к оборудованию и времени обучения.
 
-### Evaluate your Trained Model :
+### Оцените вашу обученную модель:
 
-#### Bilingual Evaluation Understudy Score
+#### Двуязычная оценка Оценка дублера
 
-The Bilingual Evaluation Understudy Score, or BLEU Score, refers to an evaluation metric for the purpose of evaluating Machine Translation Systems by comparing a generated sentence to a reference sentence.
+Оценка дублера по двуязычной оценке, или оценка BLEU, относится к метрике оценки с целью оценки систем машинного перевода путем сравнения сгенерированного предложения со ссылочным предложением.
 
-A perfect match in this comparison results in a BLEU score of 1.0, whereas a complete mismatch results in a BLEU score of 0.0.
+Идеальное совпадение в этом сравнении приводит к баллу BLEU, равному 1.0, а полное несовпадение - к баллу BLEU, равному 0.0.
 
-The BLEU Score is a universally adapted metric for evaluating translation models as it is independent of language, simple to interpret and has high correlation with manual evaluation.
+Оценка BLEU - это универсально адаптированная метрика для оценки моделей перевода, поскольку она не зависит от языка, проста для интерпретации и имеет высокую корреляцию с ручной оценкой.
 
-The BLEU score was proposed in a research conducted by Kishore Papineni, et al. “ [BLEU: a Method for Automatic Evaluation of Machine Translation](http://www.aclweb.org/anthology/P02-1040.pdf) “.
+Оценка BLEU была предложена в исследовании, проведенном Kishore Papineni, et al. “ [BLEU: метод автоматической оценки машинного перевода](http://www.aclweb.org/anthology/P02-1040.pdf) “.
 
-The BLEU SCore is generated after counting n-grams in the candidate translation matching with the n-grams in the reference text. Word order is not taken into account in this comparison.
+BLEU SCore генерируется после подсчета n-граммов в переводе кандидата, совпадающего с n-граммами в тексте ссылки. Порядок слов в этом сравнении не учитывается.
 
 So how would we define a n-gram? Let’s say a 1-gram or uni-gram would mean each individual token and a bi-gram would represent each pair of word.
 
