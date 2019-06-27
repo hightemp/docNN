@@ -634,3 +634,43 @@ For example the same phrases get repeated again and again like “said to hersel
 
 These are better results but there is still a lot of room for improvement.
 
+## 10 Extension Ideas to Improve the Model
+
+Below are 10 ideas that may further improve the model that you could experiment with are:
+
+*   Predict fewer than 1,000 characters as output for a given seed.
+*   Remove all punctuation from the source text, and therefore from the models’ vocabulary.
+*   Try a one hot encoded for the input sequences.
+*   Train the model on padded sentences rather than random sequences of characters.
+*   Increase the number of training epochs to 100 or many hundreds.
+*   Add dropout to the visible input layer and consider tuning the dropout percentage.
+*   Tune the batch size, try a batch size of 1 as a (very slow) baseline and larger sizes from there.
+*   Add more memory units to the layers and/or more layers.
+*   Experiment with scale factors ( [temperature](https://en.wikipedia.org/wiki/Softmax_function#Reinforcement_learning) ) when interpreting the prediction probabilities.
+*   Change the LSTM layers to be “stateful” to maintain state across batches.
+
+Did you try any of these extensions? Share your results in the comments.
+
+## Resources
+
+This character text model is a popular way for generating text using recurrent neural networks.
+
+Below are some more resources and tutorials on the topic if you are interested in going deeper. Perhaps the most popular is the tutorial by Andrej Karpathy titled “ [The Unreasonable Effectiveness of Recurrent Neural Networks](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) “.
+
+*    [Generating Text with Recurrent Neural Networks](http://www.cs.utoronto.ca/~ilya/pubs/2011/LANG-RNN.pdf)  \[pdf\], 2011
+*    [Keras code example of LSTM for text generation](https://github.com/fchollet/keras/blob/master/examples/lstm_text_generation.py) .
+*    [Lasagne code example of LSTM for text generation](https://github.com/Lasagne/Recipes/blob/master/examples/lstm_text_generation.py) .
+*    [MXNet tutorial for using an LSTM for text generation](http://mxnetjl.readthedocs.io/en/latest/tutorial/char-lstm.html) .
+*    [Auto-Generating Clickbait With Recurrent Neural Networks](https://larseidnes.com/2015/10/13/auto-generating-clickbait-with-recurrent-neural-networks/) .
+
+## Summary
+
+In this post you discovered how you can develop an LSTM recurrent neural network for text generation in Python with the Keras deep learning library.
+
+After reading this post you know:
+
+*   Where to download the ASCII text for classical books for free that you can use for training.
+*   How to train an LSTM network on text sequences and how to use the trained network to generate new sequences.
+*   How to develop stacked LSTM networks and lift the performance of the model.
+
+Do you have any questions about text generation with LSTM networks or about this post? Ask your questions in the comments below and I will do my best to answer them.
