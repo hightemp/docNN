@@ -6,63 +6,69 @@
 
  ![](/images/24bcf281705c0ffc16d6e2d37c12e317.jpeg) 
 
-We elaborate further, a detailed guide for setting up the library and using the toolkit for training your own custom translation system. This blog deals with generating translation for Hindi language from given English text.
+Далее мы разрабатываем подробное руководство по настройке библиотеки и использованию инструментария для обучения вашей собственной системе перевода. Этот блог посвящен созданию перевода на хинди из данного английского текста.
 
-### A Brief Overview of the Architecture of Open-NMT :
+### Краткий обзор архитектуры Open-NMT:
 
-Open-NMT is based on the research by Guillaume Klein et al, found [here](http://aclweb.org/anthology/P17-4012) .
+Open-NMT основан на исследованиях Гийома Кляйна и др., Найденных [here](http://aclweb.org/anthology/P17-4012) .
 
  ![](/images/b0b432cc8cbc84c30d186e9eca18e8c9.png) 
 
-According to the Paper, the following details are revealed about its architecture :
+Согласно документу, о его архитектуре раскрываются следующие подробности:
 
-> OpenNMT is a complete library for training and deploying neural machine translation models. The system is successor to seq2seq-attn developed at Harvard, and has been completely rewritten for ease of efficiency, readability, and generalizability. It includes vanilla NMT models along with support for attention, gating, stacking, input feeding, regularization, beam search and all other options necessary for state-of-the-art performance.
+> OpenNMT - это полная библиотека для обучения и развертывания моделей нейронного машинного перевода. Система является наследницей seq2seq-attn, разработанной в Гарварде, и была полностью переписана для простоты эффективности, удобочитаемости и обобщения. Он включает в себя ванильные модели NMT, а также поддержку внимания, стробирования, укладки, подачи входного сигнала, регуляризации, поиска луча и всех других опций, необходимых для современного уровня производительности.
 
-> The main system is implemented in the Lua/Torch mathematical framework, and can be easily be extended using Torch’s internal standard neural network components. It has also been extended by Adam Lerer of Facebook Research to support Python/PyTorch framework, with the same API.
+> Основная система реализована в математической структуре Lua / Torch и может быть легко расширена с помощью внутренних стандартных компонентов нейронной сети Torch. Он также был расширен Адамом Лерером из Facebook Research для поддержки платформы Python / PyTorch с тем же API.
 
-### Setup of Required Modules
+### Настройка необходимых модулей
 
-The chief package required for training your custom translation system is essentially pyTorch, in which the Open-NMT models have been implemented.
+Главный пакет, необходимый для обучения вашей пользовательской системе перевода, - это, по сути, pyTorch, в котором были реализованы модели Open-NMT.
 
-The priliminary step, of course is to clone the OpenNMT-py repository :
+Конечно, предварительным шагом является клонирование репозитория OpenNMT-py:
 
+```
 git clone https://github.com/OpenNMT/OpenNMT-py  
 cd OpenNMT-py
+```
 
-Here’s a requirements.txt file to gather all the required packages :
+Вот файл require.txt для сбора всех необходимых пакетов:
 
+```
 six  
 tqdm  
 torch>=0.4.0  
 git+ [https://github.com/pytorch/text](https://github.com/pytorch/text)   
 future
+```
 
-Since PyTorch is has been continuously evolving, we recommend forking the PyTorch 0.4 version to ensure a stable performance of the code base.
+Поскольку PyTorch постоянно развивается, мы рекомендуем использовать версию PyTorch 0.4, чтобы обеспечить стабильную производительность базы кода.
 
-Run the following command to automatically gather pre-requisite dependencies :
+Выполните следующую команду, чтобы автоматически собрать обязательные зависимости:
 
+```
 pip install -r requirements.txt
+```
 
-### Gather the Datasets
+### Соберите наборы данных
 
-The dataset comprises of a parallel corpus of source and target language files containing one sentence per line such that each tokens are separated by a space.
+Набор данных состоит из параллельного корпуса файлов исходного и целевого языков, содержащих одно предложение в строке, так что каждый токен разделяется пробелом.
 
-For our tutorial, we use a parallel corpora of English and Hindi sentences stored in separate files. The data is gathered from various sources and combined. The data is then re-arranged so as to create a set of files as follows :
+Для нашего урока мы используем параллельные корпусы предложений на английском и хинди, которые хранятся в отдельных файлах. Данные собираются из разных источников и объединяются. Затем данные переупорядочиваются так, чтобы создать набор файлов следующим образом:
 
-*    `src-train.txt : Training file containing 10000 English (Source Language) sentences` 
-*    `tgt-train.txt : Training file containing 10000 Hindi (Target Language) sentences` 
-*    `src-val.txt : Validation data consisting of 1000 English (Source Language) sentences` 
-*    `tgt-val.txt : Validation data consisting of 1000 Hindi (Target Language) sentences` 
-*    `src-test.txt : Test Evaluation data consisting of 1000 English (Source Language) sentences` 
-*    `tgt-test.txt : Test Evaluation data consisting of 1000 Hindi (Target Language) sentences` 
+* `src-train.txt : Учебный файл, содержащий 10000 предложений на английском языке (на исходном языке)` 
+* `tgt-train.txt : Учебный файл, содержащий 10000 предложений на хинди (целевой язык)` 
+* `src-val.txt : Данные проверки, состоящие из 1000 предложений на английском языке (на исходном языке)` 
+* `tgt-val.txt : Данные проверки, состоящие из 1000 предложений на хинди (целевой язык)` 
+* `src-test.txt : Данные тестовой оценки, состоящие из 1000 предложений на английском языке (на исходном языке)` 
+* `tgt-test.txt : Данные оценки теста, состоящие из 1000 предложений на хинди (целевой язык)` 
 
-All of the above files are placed in the /data directory.
+Все вышеперечисленные файлы находятся в каталоге /data.
 
- **NOTE :** We have used a limited amount of data for explanation and experimentation in this tutorial. However it is recommended to use a large corpora with millions of sentences to ensure a vast vocabulary of unique words for better learning and a close-to-human-translation.
+**Заметка:** В этом уроке мы использовали ограниченное количество данных для объяснения и экспериментов. Однако рекомендуется использовать большие корпуса с миллионами предложений, чтобы обеспечить обширный словарный запас уникальных слов для лучшего изучения и близкого к человеческому переводу.
 
-Validation data is employed to evaluate the model at each step to identify the convergence point. It should contain a maximum of 5000 sentences typically.
+Данные проверки используются для оценки модели на каждом этапе для определения точки сходимости. Обычно он должен содержать не более 5000 предложений.
 
-Here’s a sample showing how the text data is arranged in the corresponding files :
+Вот пример, показывающий, как текстовые данные расположены в соответствующих файлах:
 
 Source Files :  
 They also bring out a number of Tamil weekly newspapers.  
