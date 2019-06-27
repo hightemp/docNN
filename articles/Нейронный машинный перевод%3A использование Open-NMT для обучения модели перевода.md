@@ -220,5 +220,5 @@ python calculatebleu.py "pred.txt" "tgt-test.txt"
 Если у вас есть какие-либо вопросы или предложения, я хотел бы услышать об этом. Пожалуйста, напишите мне по адресу abhishek.narayanan@dataturks.com.
 
 **********
-[OpenNMT](/tags/OpenNMT.md)
 [NMT](/tags/NMT.md)
+[OpenNMT](/tags/OpenNMT.md)
