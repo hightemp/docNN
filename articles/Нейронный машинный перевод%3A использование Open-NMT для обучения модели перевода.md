@@ -91,11 +91,11 @@ There are quite a large number of Malayalees living here.
 python preprocess.py -train\_src data/src-train.txt -train\_tgt data/tgt-train.txt -valid\_src data/src-val.txt -valid\_tgt data/tgt-val.txt -save\_data data/demo
 ```
 
-### Training the Translator model :
+### Обучение модели «Переводчик»:
 
-The chief command for trianing is really simple to use. Essentially, it takes as input, a data file and a save file.
+Главная команда для trianing действительно проста в использовании. По сути, он принимает в качестве входных данных файл данных и файл сохранения.
 
-A summary of the default model used is as follows :
+Резюме используемой модели по умолчанию выглядит следующим образом:
 
 NMTModel(  
   (encoder): RNNEncoder(  
@@ -139,27 +139,31 @@ NMTModel(
 
 * * *
 
+```
 python train.py -data data/demo -save\_model demo-model
+```
 
-The above command will run a default model, comprising a two layer LSTM possessing 500 hidden units for both, the encoder and the decoder. To specify utilization of your GPU for training, specify the -gpuid argument in the above command (say -gpuid 1 for specifying usage og GPU 1).
+Приведенная выше команда будет запускать модель по умолчанию, содержащую двухслойный LSTM, имеющий 500 скрытых блоков как для кодера, так и для декодера. Чтобы указать использование вашего GPU для обучения, укажите аргумент -gpuid в приведенной выше команде (например, -gpuid 1 для указания использования GPU 1).
 
-Typically, the default model goes on till 100000 epochs, such that a check-point is saved after every 5000 epochs. So if your model converges and the validation accuracy reaches a stable point earlier, you can stop further training and use the previously saved checkpoint.
+Как правило, модель по умолчанию продолжается до 100000 эпох, так что контрольная точка сохраняется после каждых 5000 эпох. Таким образом, если ваша модель сходится и точность проверки достигает стабильной точки ранее, вы можете прекратить дальнейшее обучение и использовать ранее сохраненную контрольную точку.
 
-### Translate your own Data :
+### Переведите свои собственные данные:
 
  ![](/images/fa47ec50e5ec206672d02ad6964a7b52.jpeg) 
 
-The following command may be executed to perform an inference step on unseen text in the Source language (English) and generate corresponding translations predicted :
+Следующая команда может быть выполнена для выполнения шага вывода невидимого текста на исходном языке (английском) и генерирования соответствующих предсказанных переводов:
 
+```
 python translate.py -model demo-model\_XYZ.pt -src data/src-test.txt -output pred.txt -replace\_unk -verbose
+```
 
-This will generate the translated output and store the predictions into a file named `pred.txt` .
+Это сгенерирует переведенный вывод и сохранит прогнозы в файл с именем `pred.txt`.
 
-The model was trained for 10000 epochs on a NVIDIA GEFORCE 2GB GPU. Training on a CPU will require a very high computational cost, hence it is recommended to use a high end GPU for training the model with a large amount of data at a faster rate.
+Модель была подготовлена для 10000 эпох на GPU NVIDIA GEFORCE 2 ГБ. Обучение на ЦП потребует очень высоких вычислительных затрат, поэтому рекомендуется использовать высокопроизводительный графический процессор для обучения модели с большим количеством данных с большей скоростью.
 
-### Sample Predictions of the Model :
+### Примерные прогнозы модели:
 
-Shown below, are couple of examples for the Hindi translations generated for corresponding English sentences after training the model.
+Ниже показаны несколько примеров переводов на хинди, сгенерированных для соответствующих предложений на английском языке после обучения модели.
 
 Trees are capable of absorbing more of carbon dioxide, thus maintaining equilibrium in the air composition .
 
@@ -177,7 +181,7 @@ He lets the hair grow long.
 
 PREDICTED : वह अपने बढा लेता है .
 
-As seen above, the predictions are not good enough yet with less training data to be used for any real time translation. For performing translations close to real world, the model has to be trained on on a large vocabulary and about a million sentences, which will parallely involve a lot of computational cost in terms of hardware requirements and training time.
+Как видно выше, прогнозы недостаточно хороши, но с меньшим количеством обучающих данных, которые можно использовать для любого перевода в реальном времени. Для выполнения переводов, близких к реальному миру, модель должна быть обучена на большом словарном запасе и около миллиона предложений, что параллельно потребует значительных вычислительных затрат с точки зрения требований к оборудованию и времени обучения.
 
 ### Evaluate your Trained Model :
 
