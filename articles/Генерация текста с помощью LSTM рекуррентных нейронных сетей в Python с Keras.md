@@ -1,5 +1,7 @@
 # Генерация текста с помощью LSTM рекуррентных нейронных сетей в Python с Keras
 
+https://machinelearningmastery.com/text-generation-lstm-recurrent-neural-networks-python-keras/
+
 Recurrent neural networks can also be used as generative models.
 
 This means that in addition to being used for predictive models (making predictions) they can learn the sequences of a problem and then generate entirely new plausible sequences for the problem domain.
@@ -676,5 +678,5 @@ After reading this post you know:
 Do you have any questions about text generation with LSTM networks or about this post? Ask your questions in the comments below and I will do my best to answer them.
 
 **********
-[Генерация текста](/tags/%D0%93%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B0.md)
 [LSTM](/tags/LSTM.md)
+[Генерация текста](/tags/%D0%93%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B0.md)
