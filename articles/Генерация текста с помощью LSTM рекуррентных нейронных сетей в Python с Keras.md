@@ -674,3 +674,6 @@ After reading this post you know:
 *   How to develop stacked LSTM networks and lift the performance of the model.
 
 Do you have any questions about text generation with LSTM networks or about this post? Ask your questions in the comments below and I will do my best to answer them.
+
+**********
+[Генерация текста](/tags/%D0%93%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B0.md)
