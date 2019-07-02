@@ -103,3 +103,6 @@ Deepforge — [среда разработки](http://deepforge.org/) для г
 ### Land Lines
 
 Land Lines — не столько библиотека, сколько очень [занимательная веб-игра](https://lines.chromeexperiments.com/) на основе эксперимента Chrome от Google. Нельзя сказать, для чего нужна эта штука, но она позабавит хотя бы 15 минут.
+
+**********
+[javascript](/tags/javascript.md)
