@@ -12,18 +12,19 @@ As the first step, we need to import the required libraries:
 
 In \[1\]:
 
- \# keras module for building LSTM  
- from   keras.preprocessing.sequence   import   pad\_sequences 
+```python
+ # keras module for building LSTM  
+ from   keras.preprocessing.sequence   import   pad_sequences 
  from   keras.layers   import   Embedding  ,   LSTM  ,   Dense  ,   Dropout 
  from   keras.preprocessing.text   import   Tokenizer 
  from   keras.callbacks   import   EarlyStopping 
  from   keras.models   import   Sequential 
  import   keras.utils   as   ku  
 
- \# set seeds for reproducability 
- from   tensorflow   import   set\_random\_seed 
+ # set seeds for reproducability 
+ from   tensorflow   import   set_random_seed 
  from   numpy.random   import   seed 
- set\_random\_seed  (  2  ) 
+ set_random_seed  (  2  ) 
  seed  (  1  ) 
 
  import   pandas   as   pd 
@@ -32,7 +33,8 @@ In \[1\]:
 
  import   warnings 
  warnings  .  filterwarnings  (  "ignore"  ) 
- warnings  .  simplefilter  (  action  \=  'ignore'  ,   category  \=  FutureWarning  ) 
+ warnings  .  simplefilter  (  action  =  'ignore'  ,   category  =  FutureWarning  ) 
+```
 
 Using TensorFlow backend.
 
@@ -42,20 +44,24 @@ Load the dataset of news headlines
 
 In \[2\]:
 
- curr\_dir   \=   '../input/' 
- all\_headlines   \=   \[\] 
- for   filename   in   os  .  listdir  (  curr\_dir  ): 
+```python
+ curr_dir   =   '../input/' 
+ all_headlines   =   [] 
+ for   filename   in   os  .  listdir  (  curr_dir  ): 
      if   'Articles'   in   filename  : 
-         article\_df   \=   pd  .  read\_csv  (  curr\_dir   +   filename  ) 
-         all\_headlines  .  extend  (  list  (  article\_df  .  headline  .  values  )) 
+         article_df   =   pd  .  read_csv  (  curr_dir   +   filename  ) 
+         all_headlines  .  extend  (  list  (  article_df  .  headline  .  values  )) 
          break 
 
- all\_headlines   \=   \[  h   for   h   in   all\_headlines   if   h   !=   "Unknown"  \] 
- len  (  all\_headlines  ) 
+ all_headlines   =   [  h   for   h   in   all_headlines   if   h   !=   "Unknown"  ] 
+ len  (  all_headlines  ) 
+```
 
 Out\[2\]:
 
+```
 777
+```
 
 ## 3\. Dataset preparation [](https://www.kaggle.com/shivamb/beginners-guide-to-text-generation-using-lstms#3.-Dataset-preparation) 
 
@@ -65,17 +71,20 @@ In dataset preparation step, we will first perform text cleaning of the data whi
 
 In \[3\]:
 
- def   clean\_text  (  txt  ): 
-     txt   \=   ""  .  join  (  v   for   v   in   txt   if   v   not   in   string  .  punctuation  )  .  lower  () 
-     txt   \=   txt  .  encode  (  "utf8"  )  .  decode  (  "ascii"  ,  'ignore'  ) 
+```python
+ def   clean_text  (  txt  ): 
+     txt   =   ""  .  join  (  v   for   v   in   txt   if   v   not   in   string  .  punctuation  )  .  lower  () 
+     txt   =   txt  .  encode  (  "utf8"  )  .  decode  (  "ascii"  ,  'ignore'  ) 
      return   txt  
 
- corpus   \=   \[  clean\_text  (  x  )   for   x   in   all\_headlines  \] 
- corpus  \[:  10  \] 
+ corpus   =   [  clean_text  (  x  )   for   x   in   all_headlines  ] 
+ corpus  [:  10  ] 
+```
 
 Out\[3\]:
 
-\[' gop leadership poised to topple obamas pillars',
+```
+[' gop leadership poised to topple obamas pillars',
  'fractured world tested the hope of a young president',
  'little troublemakers',
  'angela merkel russias next target',
@@ -84,7 +93,8 @@ Out\[3\]:
  'the affair season 3 episode 6 noah goes home',
  'sprint and mr trumps fictional jobs',
  'america  becomes a stan',
- 'fighting diabetes and leading by example'\]
+ 'fighting diabetes and leading by example']
+```
 
 ### 3.2 Generating Sequence of N-gram Tokens [](https://www.kaggle.com/shivamb/beginners-guide-to-text-generation-using-lstms#3.2-Generating-Sequence-of-N-gram-Tokens) 
 
@@ -94,37 +104,41 @@ The next step is Tokenization. Tokenization is a process of extracting tokens (t
 
 In \[4\]:
 
- tokenizer   \=   Tokenizer  () 
+```python
+ tokenizer   =   Tokenizer  () 
 
- def   get\_sequence\_of\_tokens  (  corpus  ): 
-     \## tokenization 
-     tokenizer  .  fit\_on\_texts  (  corpus  ) 
-     total\_words   \=   len  (  tokenizer  .  word\_index  )   +   1 
+ def   get_sequence_of_tokens  (  corpus  ): 
+     ## tokenization 
+     tokenizer  .  fit_on_texts  (  corpus  ) 
+     total_words   =   len  (  tokenizer  .  word_index  )   +   1 
     
-     \## convert data to sequence of tokens  
-     input\_sequences   \=   \[\] 
+     ## convert data to sequence of tokens  
+     input_sequences   =   [] 
      for   line   in   corpus  : 
-         token\_list   \=   tokenizer  .  texts\_to\_sequences  (\[  line  \])\[  0  \] 
-         for   i   in   range  (  1  ,   len  (  token\_list  )): 
-             n\_gram\_sequence   \=   token\_list  \[:  i  +  1  \] 
-             input\_sequences  .  append  (  n\_gram\_sequence  ) 
-     return   input\_sequences  ,   total\_words 
+         token_list   =   tokenizer  .  texts_to_sequences  ([  line  ])[  0  ] 
+         for   i   in   range  (  1  ,   len  (  token_list  )): 
+             n_gram_sequence   =   token_list  [:  i  +  1  ] 
+             input_sequences  .  append  (  n_gram_sequence  ) 
+     return   input_sequences  ,   total_words 
 
- inp\_sequences  ,   total\_words   \=   get\_sequence\_of\_tokens  (  corpus  ) 
- inp\_sequences  \[:  10  \] 
+ inp_sequences  ,   total_words   =   get_sequence_of_tokens  (  corpus  ) 
+ inp_sequences  [:  10  ] 
+```
 
 Out\[4\]:
 
-\[\[73, 313\],
- \[73, 313, 616\],
- \[73, 313, 616, 3\],
- \[73, 313, 616, 3, 617\],
- \[73, 313, 616, 3, 617, 205\],
- \[73, 313, 616, 3, 617, 205, 314\],
- \[618, 38\],
- \[618, 38, 619\],
- \[618, 38, 619, 1\],
- \[618, 38, 619, 1, 206\]\]
+```
+[[73, 313],
+ [73, 313, 616],
+ [73, 313, 616, 3],
+ [73, 313, 616, 3, 617],
+ [73, 313, 616, 3, 617, 205],
+ [73, 313, 616, 3, 617, 205, 314],
+ [618, 38],
+ [618, 38, 619],
+ [618, 38, 619, 1],
+ [618, 38, 619, 1, 206]]
+```
 
 In the above output \[30, 507\], \[30, 507, 11\], \[30, 507, 11, 1\] and so on represents the ngram phrases generated from the input data. where every integer corresponds to the index of a particular word in the complete vocabulary of words present in the text. For example
 
@@ -143,15 +157,17 @@ Headline: they are learning data science
 
 In \[5\]:
 
- def   generate\_padded\_sequences  (  input\_sequences  ): 
-     max\_sequence\_len   \=   max  (\[  len  (  x  )   for   x   in   input\_sequences  \]) 
-     input\_sequences   \=   np  .  array  (  pad\_sequences  (  input\_sequences  ,   maxlen  \=  max\_sequence\_len  ,   padding  \=  'pre'  )) 
+```python
+ def   generate_padded_sequences  (  input_sequences  ): 
+     max_sequence_len   =   max  ([  len  (  x  )   for   x   in   input_sequences  ]) 
+     input_sequences   =   np  .  array  (  pad_sequences  (  input_sequences  ,   maxlen  =  max_sequence_len  ,   padding  =  'pre'  )) 
     
-     predictors  ,   label   \=   input\_sequences  \[:,:  \-  1  \],  input\_sequences  \[:,  \-  1  \] 
-     label   \=   ku  .  to\_categorical  (  label  ,   num\_classes  \=  total\_words  ) 
-     return   predictors  ,   label  ,   max\_sequence\_len 
+     predictors  ,   label   =   input_sequences  [:,:  -  1  ],  input_sequences  [:,  -  1  ] 
+     label   =   ku  .  to_categorical  (  label  ,   num_classes  =  total_words  ) 
+     return   predictors  ,   label  ,   max_sequence_len 
 
- predictors  ,   label  ,   max\_sequence\_len   \=   generate\_padded\_sequences  (  inp\_sequences  ) 
+ predictors  ,   label  ,   max_sequence_len   =   generate_padded_sequences  (  inp_sequences  ) 
+```
 
 Perfect, now we can obtain the input vector X and the label vector Y which can be used for the training purposes. Recent experiments have shown that recurrent neural networks have shown a good performance in sequence to sequence learning and text data applications. Lets look at them in brief.
 
@@ -174,49 +190,56 @@ We will run this model for total 100 epoochs but it can be experimented further.
 
 In \[6\]:
 
- def   create\_model  (  max\_sequence\_len  ,   total\_words  ): 
-     input\_len   \=   max\_sequence\_len   \-   1 
-     model   \=   Sequential  () 
+```python
+ def   create_model  (  max_sequence_len  ,   total_words  ): 
+     input_len   =   max_sequence_len   -   1 
+     model   =   Sequential  () 
     
-     \# Add Input Embedding Layer 
-     model  .  add  (  Embedding  (  total\_words  ,   10  ,   input\_length  \=  input\_len  )) 
+     # Add Input Embedding Layer 
+     model.add(  Embedding  (  total_words  ,   10  ,   input_length  =  input_len  )) 
     
-     \# Add Hidden Layer 1 - LSTM Layer 
-     model  .  add  (  LSTM  (  100  )) 
-     model  .  add  (  Dropout  (  0.1  )) 
+     # Add Hidden Layer 1 - LSTM Layer 
+     model.add  (  LSTM  (  100  )) 
+     model.add  (  Dropout  (  0.1  )) 
     
-     \# Add Output Layer 
-     model  .  add  (  Dense  (  total\_words  ,   activation  \=  'softmax'  )) 
+     # Add Output Layer 
+     model.add  (  Dense  (  total_words  ,   activation  =  'softmax'  )) 
 
-     model  .  compile  (  loss  \=  'categorical\_crossentropy'  ,   optimizer  \=  'adam'  ) 
+     model.compile  (  loss  =  'categorical_crossentropy'  ,   optimizer  =  'adam'  ) 
     
      return   model 
 
- model   \=   create\_model  (  max\_sequence\_len  ,   total\_words  ) 
- model  .  summary  () 
+ model   =   create_model  (  max_sequence_len  ,   total_words  ) 
+ model.summary  () 
+```
 
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+```
+_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-embedding\_1 (Embedding)      (None, 20, 10)            22170     
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-lstm\_1 (LSTM)                (None, 100)               44400     
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-dropout\_1 (Dropout)          (None, 100)               0         
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-dense\_1 (Dense)              (None, 2217)              223917    
+embedding_1 (Embedding)      (None, 20, 10)            22170     
+_________________________________________________________________
+lstm_1 (LSTM)                (None, 100)               44400     
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 100)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 2217)              223917    
 =================================================================
 Total params: 290,487
 Trainable params: 290,487
 Non-trainable params: 0
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+_________________________________________________________________
+```
 
 Lets train our model now
 
 In \[7\]:
 
- model  .  fit  (  predictors  ,   label  ,   epochs  \=  100  ,   verbose  \=  5  ) 
+```python
+ model.fit  (  predictors  ,   label  ,   epochs  =  100  ,   verbose  =  5  ) 
+```
 
+```
 Epoch 1/100
 Epoch 2/100
 Epoch 3/100
@@ -317,10 +340,13 @@ Epoch 97/100
 Epoch 98/100
 Epoch 99/100
 Epoch 100/100
+```
 
 Out\[7\]:
 
-\<keras.callbacks.History at 0x7f2ddf540550>
+```
+<keras.callbacks.History at 0x7f2ddf540550>
+```
 
 ## 5\. Generating the text [](https://www.kaggle.com/shivamb/beginners-guide-to-text-generation-using-lstms#5.-Generating-the-text) 
 
@@ -328,19 +354,21 @@ Great, our model architecture is now ready and we can train it using our data. N
 
 In \[8\]:
 
- def   generate\_text  (  seed\_text  ,   next\_words  ,   model  ,   max\_sequence\_len  ): 
-     for   \_   in   range  (  next\_words  ): 
-         token\_list   \=   tokenizer  .  texts\_to\_sequences  (\[  seed\_text  \])\[  0  \] 
-         token\_list   \=   pad\_sequences  (\[  token\_list  \],   maxlen  \=  max\_sequence\_len  \-  1  ,   padding  \=  'pre'  ) 
-         predicted   \=   model  .  predict\_classes  (  token\_list  ,   verbose  \=  0  ) 
+```python
+ def   generate_text  (  seed_text  ,   next_words  ,   model  ,   max_sequence_len  ): 
+     for   _   in   range  (  next_words  ): 
+         token_list   =   tokenizer.texts_to_sequences  ([  seed_text  ])[  0  ] 
+         token_list   =   pad_sequences  ([  token_list  ],   maxlen  =  max_sequence_len  -  1  ,   padding  =  'pre'  ) 
+         predicted   =   model.predict_classes  (  token_list  ,   verbose  =  0  ) 
         
-         output\_word   \=   "" 
-         for   word  ,  index   in   tokenizer  .  word\_index  .  items  (): 
-             if   index   \==   predicted  : 
-                 output\_word   \=   word 
+         output_word   =   "" 
+         for   word,  index   in   tokenizer  .  word_index  .  items  (): 
+             if   index   ==   predicted  : 
+                 output_word   =   word 
                  break 
-         seed\_text   +=   " "  +  output\_word 
-     return   seed\_text  .  title  () 
+         seed_text   +=   " "  +  output_word 
+     return   seed_text.title  () 
+```
 
 ## 6\. Some Results [](https://www.kaggle.com/shivamb/beginners-guide-to-text-generation-using-lstms#6.-Some-Results) 
 
