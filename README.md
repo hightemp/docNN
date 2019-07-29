@@ -41,3 +41,4 @@
 [GTX](/tags/GTX.md)
 [Titan](/tags/Titan.md)
 [Amazon AWS](/tags/Amazon%20AWS.md)
+[Microsoft Azure](/tags/Microsoft%20Azure.md)
