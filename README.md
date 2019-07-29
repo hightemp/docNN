@@ -37,3 +37,6 @@
 [javascript](/tags/javascript.md)
 [python](/tags/python.md)
 [GPU](/tags/GPU.md)
+[RTX](/tags/RTX.md)
+[GTX](/tags/GTX.md)
+[Titan](/tags/Titan.md)
