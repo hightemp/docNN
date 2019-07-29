@@ -40,3 +40,4 @@
 [RTX](/tags/RTX.md)
 [GTX](/tags/GTX.md)
 [Titan](/tags/Titan.md)
+[Amazon AWS](/tags/Amazon%20AWS.md)
