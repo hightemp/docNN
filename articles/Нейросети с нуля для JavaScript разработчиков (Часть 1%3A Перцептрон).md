@@ -332,3 +332,6 @@ is incomplete as to space and indefinite as to time.
 This ignorance, implicit in all our brains,
 is the counterpart of the abstraction which renders our knowledge useful.
 ```
+
+**********
+[javascript](/tags/javascript.md)
