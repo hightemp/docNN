@@ -3,7 +3,7 @@
  _Перевод статьи [Elyx0](https://twitter.com/Elyx0) : [Neural networks from scratch for Javascript linguists (Part1 — The Perceptron)](https://hackernoon.com/neural-networks-from-scratch-for-javascript-linguists-part1-the-perceptron-632a4d1fbad2) ._ 
 
  [ ![](/images/ee37f727c9426a8d6b687ec1cfd515bf) ](https://camo.githubusercontent.com/816a30add6b1dff12dc2d7f85d9f888714c16413/68747470733a2f2f63646e2d696d616765732d312e6d656469756d2e636f6d2f6d61782f3830302f312a6958786e6c374d70457854486a5670756b48504d73672e676966)   
- _ [Игра в змейку с обучением](http://snakeneuralnetwork.herokuapp.com/) _ 
+ _[Игра в змейку с обучением](http://snakeneuralnetwork.herokuapp.com/)_ 
 
 Существует большая вероятность, что за последние месяцы вы хотя бы раз слышали о нейронной сети или искусственном интеллекте, которые, как представляется, творят чудеса: [оценка вашего селфи](http://karpathy.github.io/2015/10/25/selfie/) , [SIRI, понимающая ваш голос](http://mashable.com/2014/08/18/siri-fails/#hMwSkraMiPqp) , победа над человеком в таких играх, как Шахматы и [Го](http://www.cbc.ca/news/technology/go-google-alphago-lee-sedol-deepmind-1.3488913) , [превращение лошади в зебру](https://twitter.com/goodfellow_ian/status/851124988903997440) на произвольной картинке или нейросеть, делающая вас моложе, старше или [меняющая ваш пол](https://www.faceapp.com/) на любом фото.
 
